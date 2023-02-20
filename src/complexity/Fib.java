@@ -1,4 +1,8 @@
-public class Main {
+package complexity;
+
+
+
+public class Fib {
     public static void main(String[] args) {
         TimeTool.check("fib", new TimeTool.Task() {
             @Override
