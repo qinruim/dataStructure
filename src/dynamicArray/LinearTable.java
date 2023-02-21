@@ -13,5 +13,7 @@ public class LinearTable {
 
         System.out.println(list.toString());
 
+
+
     }
 }

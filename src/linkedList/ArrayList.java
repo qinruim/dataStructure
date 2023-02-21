@@ -1,6 +1,4 @@
-package dynamicArray;
-
-import java.util.Arrays;
+package linkedList;
 
 /**动态数组接口设计
  * int size(); // 元素的数量
