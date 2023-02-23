@@ -1,8 +1,12 @@
 package linkedList;
 
-public class LinkedList<E> extends AbstractList<E> {
+/**
+ * 双向链表
+ * @param <E>
+ */
+public class BidLinkedList<E> extends AbstractList<E> {
     private Node<E> first;
-
+    private Node<E> last;
 
     /**
      * 节点（内部类） 包括存储的元素和下一个节点
@@ -10,8 +14,11 @@ public class LinkedList<E> extends AbstractList<E> {
      */
     private static class Node<E>{
         E element;
+        Node<E> prev;
         Node<E> next;
-        public Node(E element, Node<E> next) {
+
+        public Node(Node<E> prev,E element, Node<E> next) {
+            this.prev = prev;
             this.element = element;
             this.next = next;
         }
@@ -23,6 +30,7 @@ public class LinkedList<E> extends AbstractList<E> {
     public void clear(){
         size = 0;
         first = null;
+        last = null;
     }
 
     @Override
@@ -41,15 +49,7 @@ public class LinkedList<E> extends AbstractList<E> {
 
     @Override
     public void add(int index, E element) {
-        if (index == 0){
-            first = new Node<>(element,first);
-        }
-        else {
-            //插入位置的上一个节点
-            Node<E> preNode = node(index - 1);
-            preNode.next = new Node<>(element,preNode.next);
-        }
-        size++;
+
     }
 
     @Override
@@ -96,11 +96,24 @@ public class LinkedList<E> extends AbstractList<E> {
      */
     private Node<E> node(int index){
         rangeCheck(index);
-        Node<E> node = first;
-        for (int i = 0; i < index; i++) {
-            node = node.next;
+
+        if (index < (size >> 1)){
+            //从左边开始找
+            Node<E> node = first;
+            for (int i = 0; i < index; i++) {
+                node = node.next;
+            }
+            return node;
         }
-        return node;
+        else {
+            //从右边开始找
+            Node<E> node = last;
+            for (int i = size-1; i > index; i--) {
+                node = node.prev;
+            }
+            return node;
+        }
+
     }
 
     @Override

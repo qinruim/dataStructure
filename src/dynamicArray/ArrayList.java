@@ -92,7 +92,7 @@ public class ArrayList<E> {
     }
 
     /**
-     * 添加元素到index位置
+     * 添加元素到index位置  O()
      * @param element
      */
     public void add(int index,E element){
@@ -127,7 +127,7 @@ public class ArrayList<E> {
     }
 
     /**
-     * 返回index位置对应元素
+     * 返回index位置对应元素  O(1)
      * @param index
      * @return
      */
@@ -139,7 +139,7 @@ public class ArrayList<E> {
     }
 
     /**
-     * 设置index位置对应元素
+     * 设置index位置对应元素  O(1)
      * @param index
      * @return 原来的元素
      */
@@ -161,12 +161,34 @@ public class ArrayList<E> {
         if (index < 0 || index > size){
             throw new IndexOutOfBoundsException("Index = " + index + ",Size = " + size);
         }
+        trim(size);
         E old = elements[index];
         for (int i = index; i < size; i++) {
             elements[i] = elements[i + 1];
         }
         elements[size--] = null;
         return old;
+    }
+
+    /**
+     * 缩容操作
+     * @param size
+     */
+    private void trim(int size) {
+        int oldCapacity = elements.length;
+        //新容量为旧容量一半    二进制 右移一位相当于除以2
+        int newCapacity = oldCapacity >> 1;
+        if (size >= oldCapacity >> 1 || oldCapacity <= DEFAULE_CAPACITY){
+            return;
+        }
+        //程序到这里说明剩余空间还足够大
+        E[] newElements = (E[]) new Object[newCapacity];
+        for (int i = 0; i < size; i++) {
+            newElements[i] = elements[i];
+        }
+        elements = newElements;
+
+
     }
 
     /**

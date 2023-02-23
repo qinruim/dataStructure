@@ -1,0 +1,192 @@
+# 方法一：递归
+
+- 明确递归的基本条件：如果是空节点，返回`null`， 如果是一个节点，那么不需要翻转
+- 递归调用下一个节点，并接受返回值（想象这个函数已经帮你翻转了后面的节点，并返回了自己的头结点）
+- 明确每层递归的逻辑：
+  - 需要获取当前节点`curr`的下一个节点`nxt`（该节点`nxt`是翻转后的最后一个节点）
+  - 我们将`nxt`的`next`指向`curr`
+  - 返回之前递归调用的新的头结点`newHead`
+
+* []
+
+```C++
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if(!head || !head->next) return head;
+
+        ListNode* newHead = reverseList(head->next);
+
+        head->next->next = head;
+        head->next = nullptr;
+        return newHead;
+    }
+};
+
+```
+
+* []
+
+```Java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode newHead = reverseList(head.next);
+
+        head.next.next = head;
+        head.next = null;
+        return newHead;
+    }
+}
+
+```
+
+* []
+
+```JavaScript
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function(head) {
+    if (!head || !head.next) {
+        return head;
+    }
+    
+    let newHead = reverseList(head.next);
+    
+    head.next.next = head;
+    head.next = null;
+    return newHead;
+};
+
+```
+
+* []
+
+```Python
+class Solution:
+    def reverseList(self, head):
+        if not head or not head.next:
+            return head
+        
+        new_head = self.reverseList(head.next)
+        
+        head.next.next = head
+        head.next = None
+        return new_head
+```
+
+# 复杂度
+
+- 时间复杂度： $O(n)$
+- 空间复杂度： $O(n)$
+
+# 方法二：迭代
+
+使用三个指针`（prev，curr和next）`遍历整个链表
+
+* []
+
+```C++
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if (!head) {
+            return head;
+        }
+        ListNode* prev = nullptr;
+        ListNode* curr = head;
+        ListNode* nxt = head->next;
+        
+        while (curr) {
+            curr->next = prev;
+            prev = curr;
+            curr = nxt;
+            nxt = nxt ? nxt->next : nullptr;
+        }
+        
+        return prev;
+    }
+};
+
+```
+
+* []
+
+```JavaScript
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function(head) {
+    if (!head) {
+        return head;
+    }
+    let prev = null;
+    let curr = head;
+    let nxt = head.next;
+    
+    while (curr) {
+        curr.next = prev;
+        prev = curr;
+        curr = nxt;
+        nxt = nxt ? nxt.next : null;
+    }
+    
+    return prev;
+};
+
+```
+
+* []
+
+```Java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+        ListNode prev = null;
+        ListNode curr = head;
+        ListNode nxt = head.next;
+        
+        while (curr != null) {
+            curr.next = prev;
+            prev = curr;
+            curr = nxt;
+            nxt = nxt != null ? nxt.next : null;
+        }
+        
+        return prev;
+    }
+}
+```
+
+* []
+
+```Python
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None:
+            return head
+        prev, curr, nxt = None, head, head.next
+
+        while curr:
+            curr.next = prev
+            prev = curr
+            curr = nxt
+            nxt = nxt.next if nxt else None
+        
+        return prev
+
+```
+
+# 复杂度
+
+- 时间复杂度： $O(n)$
+- 空间复杂度： $O(1)$
+

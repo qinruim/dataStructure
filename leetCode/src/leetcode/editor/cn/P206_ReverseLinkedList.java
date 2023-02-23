@@ -47,7 +47,7 @@ package leetcode.editor.cn;
 
 /**
  * 反转链表
- * @author DY
+ * @author mqinrui
  * @date 2023-02-21 17:07:32
  */
 public class P206_ReverseLinkedList{
@@ -78,20 +78,37 @@ public class P206_ReverseLinkedList{
 
 class Solution {
     /**
-     * 递归
+     * 非递归（迭代）
      * @param head
      * @return
      */
     public ListNode reverseList(ListNode head) {
-        if (head == null || head.next == null){
-            return head;
+        //递归
+//        if (head == null || head.next == null){
+//            return head;
+//        }
+//        //反转成功后 应该有 原来的尾节点变成头节点，原来的头节点（传入的节点）变成尾节点指向null
+//        ListNode newHead = reverseList(head.next);
+//        //已经得到除了原来的head以外的反转结果，还需要让原来的head.next指向原来的head,原来的head指向null
+//        head.next.next = head;
+//        head.next = null;
+//        return newHead;
+
+        //非递归
+        //初始：  前一个接节点为null  当前节点为head
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null){
+            //后一个节点为 cur.next
+            ListNode next = cur.next;
+            //将前一个节点 变成后一个节点（从pre开始开始反转）
+            cur.next = pre;
+            //将当前节点变成前一个节点
+            pre = cur;
+            //将后一个节点变成当前节点
+            cur = next;
         }
-        else {
-            ListNode newHead = reverseList(head.next);
-            head.next.next = head;
-            head.next = null;
-            return newHead;
-        }
+        return pre;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
