@@ -1,14 +1,13 @@
 package linkedList;
 
-import com.sun.xml.internal.ws.api.pipe.NextAction;
+import java.security.cert.PKIXRevocationChecker;
 
 /**
  * 双向链表
  * @param <E>
  */
-public class BidLinkedList<E> extends AbstractList<E> {
+public class SingleCircleLinkedList<E> extends AbstractList<E> {
     private Node<E> first;
-    private Node<E> last;
 
     /**
      * 节点（内部类） 包括存储的元素和上一个、下一个节点
@@ -16,11 +15,9 @@ public class BidLinkedList<E> extends AbstractList<E> {
      */
     private static class Node<E>{
         E element;
-        Node<E> prev;
         Node<E> next;
 
-        public Node(Node<E> prev,E element, Node<E> next) {
-            this.prev = prev;
+        public Node(E element, Node<E> next) {
             this.element = element;
             this.next = next;
         }
@@ -32,7 +29,6 @@ public class BidLinkedList<E> extends AbstractList<E> {
     public void clear(){
         size = 0;
         first = null;
-        last = null;
     }
 
     @Override
@@ -57,32 +53,15 @@ public class BidLinkedList<E> extends AbstractList<E> {
     @Override
     public void add(int index, E element) {
         rangeCheck(index);
-
-        if (index == size) {
-           //在最后面添加元素
-            Node<E> oldLast = last;
-            //新添加节点
-            Node<E> last = new Node<>(oldLast, element,null);
-            //之前链表为空，这是链表添加的第一个元素
-            if (oldLast == null) {
-                first = last;
-            } else {
-                oldLast.next = last;
-            }
-
-        } else {
-            //插入位置原有节点即为要插入节点的next
-            Node<E> next = node(index);
-            //插入位置原有节点的上一个即为新插入节点的prev
-            Node<E> prev = next.prev;
-            //新节点
-            Node<E> node = new Node<>(prev, element, next);
-            //index=0
-            if (prev == null) {
-                first = node;
-            } else {
-                prev.next = node;
-            }
+        if (index == 0){
+            first = new Node<E>(element,first);
+            //拿到最后一个节点
+            Node<E> last = (size == 0) ? first : node(size - 1);
+            last.next = first;
+        }
+        else {
+            Node<E> prev = node(index - 1);
+            prev.next = new Node<>(element,prev.next);
         }
         size++;
     }
@@ -95,19 +74,21 @@ public class BidLinkedList<E> extends AbstractList<E> {
     @Override
     public E remove(int index) {
         rangeCheck(index);
-        //要删除的元素
-        Node<E> node = node(index);
-        Node<E> prev = node.prev;
-        Node<E> next = node.next;
-        if (prev == null) { //index=0
-           first = next;
-        } else {
-            prev.next = next;
+        //默认被删除的是first  其他情况后面会覆盖
+        Node<E> node = first;
+        if (index == 0){
+            if (size == 1) {
+                first = null;
+            } else {
+                Node<E> last = node(size - 1);
+                first = first.next;
+                last.next = first;
+            }
         }
-        if (next == null) { //index=size-1
-            last = prev;
-        } else {
-            next.prev = prev;
+        else {
+            Node<E> prev = node(index - 1);
+            node = prev.next;
+            prev.next = node.next;
         }
         size--;
         return node.element;
@@ -142,23 +123,13 @@ public class BidLinkedList<E> extends AbstractList<E> {
      */
     private Node<E> node(int index){
         rangeCheck(index);
-
-        if (index < (size >> 1)){
             //从左边开始找
             Node<E> node = first;
             for (int i = 0; i < index; i++) {
                 node = node.next;
             }
             return node;
-        }
-        else {
-            //从右边开始找
-            Node<E> node = last;
-            for (int i = size-1; i > index; i--) {
-                node = node.prev;
-            }
-            return node;
-        }
+
 
     }
 
