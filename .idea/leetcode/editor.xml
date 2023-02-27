@@ -25,6 +25,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/leetCode/src/leetcode/editor/cn/P203_RemoveLinkedListElements.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/leetCode/src/leetcode/editor/cn/doc/content/P203_RemoveLinkedListElements.md" />
+              <option name="frontendQuestionId" value="leetcode.cn203" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/leetCode/src/leetcode/editor/cn/P203_RemoveLinkedListElements.java" />
+              <option name="titleSlug" value="remove-linked-list-elements" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/leetCode/src/leetcode/editor/cn/P206_ReverseLinkedList.java">
           <value>
             <LeetcodeEditor>
@@ -44,6 +55,17 @@
               <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/leetCode/src/leetcode/editor/cn/P237_DeleteNodeInALinkedList.java" />
               <option name="titleSlug" value="delete-node-in-a-linked-list" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetCode/src/leetcode/editor/cn/P83_RemoveDuplicatesFromSortedList.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/leetCode/src/leetcode/editor/cn/doc/content/P83_RemoveDuplicatesFromSortedList.md" />
+              <option name="frontendQuestionId" value="leetcode.cn83" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/leetCode/src/leetcode/editor/cn/P83_RemoveDuplicatesFromSortedList.java" />
+              <option name="titleSlug" value="remove-duplicates-from-sorted-list" />
             </LeetcodeEditor>
           </value>
         </entry>
