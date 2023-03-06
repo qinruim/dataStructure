@@ -1,0 +1,30 @@
+### 解题思路
+
+根据官方的方法三：前提数组是升序，两个指针分别放在两边比较大小逆序放入答案数组，不能按顺序放入，因为根据数组特点，有负数，最小的值一定在中间。
+
+### 代码
+
+* java
+
+```java
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        int n = nums.length;
+        int[] ans = new int[n];
+        int i = 0, j = n - 1, position = n - 1;
+        while(i <= j){
+            if(nums[i] * nums[i] > nums[j] * nums[j]){
+                ans[position] = nums[i] * nums[i];
+                i++;
+                position--;
+            }else{
+                ans[position] = nums[j] * nums[j];
+                j--;
+                position--;
+            }
+        }
+        return ans;
+    }
+}
+```
+

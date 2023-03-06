@@ -64,8 +64,7 @@ public class P20_ValidParentheses{
 class Solution {
 	private HashMap<Character, Character> map = new HashMap<>();
 
-	public Solution() {   	//用构造函数初始化map
-
+	public Solution() {   	//用静态代码块初始化map（jdk16以上可以用静态代码块初始化）
 		map.put('(',')');
 		map.put('[',']');
 		map.put('{','}');
@@ -110,10 +109,11 @@ class Solution {
 //		return stack.isEmpty();
 
 		/**
-		 * 思路2 用hashMap
+		 * 思路2 用hashMap进行括号的匹配
+		 * 其他思路同方法一
 		 *
 		 */
-				Stack<Character> stack = new Stack<>();
+		Stack<Character> stack = new Stack<>();
 		int length = s.length();
 		for (int i = 0; i < length; i++) {
 			char bracket = s.charAt(i);
@@ -133,8 +133,6 @@ class Solution {
 			}
 		}
 		return stack.isEmpty();
-
-
 	}
 }
 

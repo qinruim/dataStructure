@@ -1,0 +1,29 @@
+不断的截取，如果是 ```ABC``` 类型的，就把他们全部拆开，然后单独计算，最后在累加他们的和。如果是 ```(A)``` 类型的，把两边的括号剥掉，只计算 ```A``` ，然后乘以 ```2``` 。
+
+* java
+
+```java
+public int scoreOfParentheses(String s) {
+    if (s.equals("()"))
+        return 1;
+    int res = 0;
+    int count = 0;
+    int preIndex = 0;// 截取子串开始的位置
+    for (int i = 0; i < s.length(); i++) {
+        count += s.charAt(i) == '(' ? 1 : -1;
+        if (count == 0) {
+            if (preIndex == 0 && i == s.length() - 1) {
+                // 如果不能截取，把两边的括号剥掉
+                return 2 * scoreOfParentheses(s.substring(1, s.length() - 1));
+            } else {
+                // 截取的子串累加
+                res += scoreOfParentheses(s.substring(preIndex, i + 1));
+            }
+            // 下一个子串开始的位置
+            preIndex = i + 1;
+        }
+    }
+    return res;
+}
+```
+
