@@ -74,11 +74,12 @@ class Solution {
 		int sum = 0;
 		int subLength = 0;
 		int start = 0;
-		int result = Integer.MAX_VALUE;
+//		int result = Integer.MAX_VALUE;
+		int result = nums.length;
 		//end是滑动窗口结束位置 将之向后滑动
 		for (int end = 0; end < nums.length; end++) {
 			sum += nums[end];
-			//更新滑动窗口
+			//注意这里使用while，每次更新 start（起始位置），并不断比较子序列是否符合条件
 			while (sum >= target){
 				//记录子数组长度 更新result
 				subLength = end - start + 1;
@@ -88,7 +89,8 @@ class Solution {
 				start++;
 			}
 		}
-		return result == Integer.MAX_VALUE ? 0 : result;
+//		return result == Integer.MAX_VALUE ? 0 : result;
+		return result == nums.length ? 0 : result;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

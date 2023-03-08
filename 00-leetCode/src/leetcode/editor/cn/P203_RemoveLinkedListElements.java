@@ -109,23 +109,29 @@ class Solution {
 	 * @param val
 	 * @return
 	 */
-//	public ListNode removeElements(ListNode head, int val) {
-//		//虚拟头节点
-//		ListNode virtualNode = new ListNode(val - 1);
-//		virtualNode.next = head;
-//		ListNode prev = virtualNode;
-//		//链表删除操作
-//		while (prev.next != null){
-//			if (prev.next.val == val){
-//				prev.next = prev.next.next;
-//			}
-//			else {
-//				prev = prev.next;
-//			}
-//		}
-//		return virtualNode.next;
-////		return head;  //不能返回head 因为前面没有对head节点做任何处理  返回的是原来的头节点
-//	}
+	public ListNode removeElements(ListNode head, int val) {
+		//虚拟头节点
+		ListNode dummyNode = new ListNode(-1,head);
+		if (head == null){
+			return head;
+		}
+		ListNode prev = dummyNode;
+		ListNode cur = head;
+		while (cur != null){
+			if (cur.val == val){
+				//删除当前节点，prev不变
+				prev.next = cur.next;
+			}
+			else {
+				//不删除，将prev后移
+				prev = cur;
+			}
+			//移动cur
+			cur = cur.next;
+		}
+		return dummyNode.next;
+	}
+
 
 	/**
 	 * 方法三 递归
@@ -140,14 +146,14 @@ class Solution {
 	 * @param val
 	 * @return
 	 */
-	public ListNode removeElements(ListNode head, int val) {
-		if (head == null){
-			return head;
-		}
-
-		head.next = removeElements(head.next,val);
-		return head.val == val ? head.next : head;
-	}
+//	public ListNode removeElements(ListNode head, int val) {
+//		if (head == null){
+//			return head;
+//		}
+//
+//		head.next = removeElements(head.next,val);
+//		return head.val == val ? head.next : head;
+//	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
