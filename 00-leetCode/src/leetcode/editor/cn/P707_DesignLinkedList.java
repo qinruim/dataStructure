@@ -54,25 +54,36 @@ public class P707_DesignLinkedList{
 	 
 //力扣代码提交区
 //leetcode submit region begin(Prohibit modification and deletion)
-class ListNode{
-    private int val;
-    private ListNode next;
 
-    public ListNode(int val, ListNode next) {
-        this.val = val;
-        this.next = next;
-    }
 
-    public ListNode(int val) {
-        this.val = val;
-    }
-
-    public ListNode() {
-    }
-}
 
 class MyLinkedList {
+    /**
+     * 链表节点
+     */
+    private class ListNode{
+        private int val;
+        private ListNode next;
+
+        public ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+
+        public ListNode(int val) {
+            this.val = val;
+        }
+
+        public ListNode() {
+        }
+    }
+    /**
+     * 链表大小
+     */
     private int size;
+    /**
+     * 虚拟头节点
+     */
     private ListNode dummyHead;
 
     /**
@@ -80,34 +91,93 @@ class MyLinkedList {
      */
     public MyLinkedList() {
         size = 0;
-        dummyHead = new ListNode(-1);
+        dummyHead = new ListNode();
     }
-    
+
+    /**
+     * 获取指定索引节点的val
+     * @param index
+     * @return
+     */
     public int get(int index) {
-        if (index < 0 || index > (size - 1)){
+        //索引无效
+        if (index < 0 || index >= size){
             return  -1;
         }
+        //用一个指针 指向需要找的节点，初始为真头节点
         ListNode cur = dummyHead.next;
         for (int i = 0; i < index; i++) {
             cur = cur.next;
         }
         return cur.val;
     }
-    
+
+    /**
+     * 在头节点之前添加一个值为val节点（新头节点）
+     * 相当于在第0个元素前添加
+     * @param val
+     */
     public void addAtHead(int val) {
-
+        addAtIndex(0,val);
     }
-    
+
+    /**
+     * 在尾部添加一个新节点
+     * 相当于在（末尾+1）个元素前添加
+     * @param val
+     */
     public void addAtTail(int val) {
-
+        addAtIndex(size,val);
     }
-    
+
+    /**
+     * 在链表中的index个节点之前添加值为val的节点。(新的第index个节点)
+     * 如果index等于链表的长度，则该节点将附加到链表的末尾。
+     * 如果 index 大于链表长度，则不会插入节点。
+     * 如果index小于0，则在头部插入节点。
+     * @param index
+     * @param val
+     */
     public void addAtIndex(int index, int val) {
-
+        if (index > size){
+            return;
+        }
+        if (index < 0){
+           index = 0;
+        }
+        //找到要添加位置的前一个节点 因为有虚拟头节点，不对头节点单独处理，那么寻找前置节点时只能从虚拟头节点开始
+        ListNode cur = dummyHead;
+        for (int i = 0; i < index; i++) {
+            cur = cur.next;
+        }
+        //此时cur为 index - 1 节点(要插入位置的前一个节点)
+        ListNode newIndex = new ListNode(val, cur.next);
+        cur.next = newIndex;
+        size++;
     }
-    
-    public void deleteAtIndex(int index) {
 
+    /**
+     * 如果索引 index 有效，则删除链表中的第 index 个节点。
+     * @param index
+     */
+    public void deleteAtIndex(int index) {
+        if (index < 0 || index > size - 1){
+            return;
+        }
+        //头节点需要单独处理
+        if (index == 0){
+            dummyHead = dummyHead.next;
+            size--;
+            return;
+        }
+        //让 index-1 .next指向 index.next 尾节点的next为null  不需要单独处理
+        ListNode cur = dummyHead;
+        for (int i = 0; i < index; i++) {
+            cur = cur.next;
+        }
+        //此时cur为 index - 1 节点(要插入位置的前一个节点)
+        cur.next = cur.next.next;
+        size--;
     }
 }
 
