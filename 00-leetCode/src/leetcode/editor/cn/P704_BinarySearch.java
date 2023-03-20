@@ -57,6 +57,7 @@ class Solution {
 		}
 		int left = 0,right = nums.length - 1;
 		while (left <= right){
+			//用移位代理除法，避免整数溢出
 			int mid = left + ((right - left) >> 1);
 			if (nums[mid] == target){
 				return mid;
@@ -68,8 +69,7 @@ class Solution {
 				left = mid + 1;
 			}
 		}
-
-		return -1;
+  		return -1;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
