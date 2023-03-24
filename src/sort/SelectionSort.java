@@ -12,7 +12,7 @@ public class SelectionSort {
     }
 
     private static void selection(int[] a) {
-        //i代表每轮选择最小元素要交换到的目标索引（未排序部分的最前面）
+        //i代表每轮选择最小元素要交换到的目标索引
         for (int i = 0; i < a.length - 1; i++) {
             //min为最小元素索引
             int min = i;
@@ -22,7 +22,7 @@ public class SelectionSort {
                     min = j;
                 }
             }
-            //i=min不需要交换
+            //i=min，说明在这一轮选择中后面没有比目标搜索i更小的元素，min没有被更新，不需要交换
             if (min != i){
                 swap(a,min,i);
             }

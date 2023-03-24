@@ -62,13 +62,13 @@ public class P20_ValidParentheses{
 //力扣代码
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-	private HashMap<Character, Character> map = new HashMap<>();
-
-	public Solution() {   	//用静态代码块初始化map（jdk16以上可以用静态代码块初始化）
-		map.put('(',')');
-		map.put('[',']');
-		map.put('{','}');
-	}
+//	private HashMap<Character, Character> map = new HashMap<>();
+//
+//	public Solution() {   	//用静态代码块初始化map（jdk16以上可以用静态代码块初始化）
+//		map.put('(',')');
+//		map.put('[',']');
+//		map.put('{','}');
+//	}
 
 	public boolean isValid(String s) {
 		/**
@@ -81,44 +81,12 @@ class Solution {
 		 * 最后判断栈内是否为空  为空则true  否则false
 		 */
 
-//		Stack<Character> stack = new Stack<>();
-//		int length = s.length();
-//		for (int i = 0; i < length; i++) {
-//			char bracket = s.charAt(i);
-//			//左括号入栈
-//			if (bracket == '(' || bracket == '[' || bracket == '{'){
-//				stack.push(bracket);
-//			}
-//			else {
-//				//右括号且栈为空，false
-//				if (stack.isEmpty()) {
-//					return false;
-//				}
-//				//右括号且栈不为空
-//				char left = stack.pop();
-//				//弹出栈顶元素不匹配
-//				if (left == '(' && bracket != ')') {
-//					return false;
-//				}if (left == '[' && bracket != ']') {
-//					return false;
-//				}if (left == '{' && bracket != '}') {
-//					return false;
-//				}
-//			}
-//		}
-//		return stack.isEmpty();
-
-		/**
-		 * 思路2 用hashMap进行括号的匹配
-		 * 其他思路同方法一
-		 *
-		 */
 		Stack<Character> stack = new Stack<>();
 		int length = s.length();
 		for (int i = 0; i < length; i++) {
 			char bracket = s.charAt(i);
 			//左括号入栈
-			if (map.containsKey(bracket)){
+			if (bracket == '(' || bracket == '[' || bracket == '{'){
 				stack.push(bracket);
 			}
 			else {
@@ -126,13 +94,45 @@ class Solution {
 				if (stack.isEmpty()) {
 					return false;
 				}
-				//右括号且栈不为空 弹出栈顶元素进行匹配
-				if (map.get(stack.pop()) != bracket){
+				//右括号且栈不为空
+				char left = stack.pop();
+				//弹出栈顶元素不匹配
+				if (left == '(' && bracket != ')') {
+					return false;
+				}if (left == '[' && bracket != ']') {
+					return false;
+				}if (left == '{' && bracket != '}') {
 					return false;
 				}
 			}
 		}
 		return stack.isEmpty();
+
+		/**
+		 * 思路2 用hashMap进行括号的匹配
+		 * 其他思路同方法一
+		 *
+		 */
+//		Stack<Character> stack = new Stack<>();
+//		int length = s.length();
+//		for (int i = 0; i < length; i++) {
+//			char bracket = s.charAt(i);
+//			//左括号入栈
+//			if (map.containsKey(bracket)){
+//				stack.push(bracket);
+//			}
+//			else {
+//				//右括号且栈为空，false
+//				if (stack.isEmpty()) {
+//					return false;
+//				}
+//				//右括号且栈不为空 弹出栈顶元素进行匹配
+//				if (map.get(stack.pop()) != bracket){
+//					return false;
+//				}
+//			}
+//		}
+//		return stack.isEmpty();
 	}
 }
 

@@ -17,7 +17,7 @@ public class BubbleSort {
         while (true){
             //一轮冒泡
 //            boolean swapped = false;
-            //最后一次交换索引
+            //最后一次交换索引位置
             int lastSwapIndex = 0;
             for (int i = 0; i < n; i++) {
                 System.out.println("比较次数" + i);
@@ -28,14 +28,12 @@ public class BubbleSort {
                 }
             }
             System.out.println("第轮冒泡" + Arrays.toString(a));
+            //每轮冒泡时，最后一次交换索引可以作为下一轮冒泡的比较次数，
+            //若为0，表示整个数组有序，直接结束
             n = lastSwapIndex;
             if (n == 0){
                 break;
             }
-//            if (!swapped){
-//                //数组已经有序，不必再冒泡
-//                break;
-//            }
         }
 
         System.out.println(Arrays.toString(a));
