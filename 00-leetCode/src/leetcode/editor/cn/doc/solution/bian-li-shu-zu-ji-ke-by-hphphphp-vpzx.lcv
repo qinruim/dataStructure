@@ -1,0 +1,40 @@
+### 解题思路
+
+首先位运算判断是否出现单个不同的字母。
+其次为了排除“aa”,“bb” 这样的情况，使用sum来看和是否一样
+再次为了排除s t是否有不同的字母，使用含有26个元素的数组
+时间复杂度为O(n) 空间复杂度为O(1)
+
+### 代码
+
+* golang
+
+```golang
+
+func isAnagram(s string, t string) bool {
+	if len(s) != len(t) {
+		return false
+	}
+
+	var cal int
+	var sum int
+	temp := make([]int, 26)
+	for _, i := range s {
+		cal ^= int(i)
+		sum += int(i)
+		temp[int(i)-97] = 1
+	}
+	for _, i := range t {
+		cal ^= int(i)
+		sum -= int(i)
+		if temp[int(i)-97] == 0 {
+			return false
+		}
+	}
+
+	return cal == 0 && sum == 0
+
+}
+
+```
+
