@@ -1,0 +1,88 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+	/**
+	 * 方法一 找到prev 进行链表删除的操作 需要单独考虑头节点
+	 * @param head
+	 * @param val
+	 * @return
+	 */
+//    public ListNode removeElements(ListNode head, int val) {
+//		//删除头节点（若头节点值为要删除的）
+//		while (head != null && head.val == val){
+//			head = head.next;
+//		}
+//		if (head == null) {
+//			return head;
+//		}
+//		//当前节点不必删除 设置为prev
+//		ListNode prev = head;
+//		//确保当前节点之后还有节点
+//		while (prev.next != null){
+//			if (prev.next.val == val){
+//				prev.next = prev.next.next;
+//			}
+//			else {
+//				prev = prev.next;
+//			}
+//		}
+//		return head;
+//
+//	}
+
+	/**
+	 * 方法二 找到prev 进行链表删除的操作 添加虚拟头节点 不需要单独考虑头节点
+	 * @param head
+	 * @param val
+	 * @return
+	 */
+//	public ListNode removeElements(ListNode head, int val) {
+//		//虚拟头节点
+//		ListNode virtualNode = new ListNode(val - 1);
+//		virtualNode.next = head;
+//		ListNode prev = virtualNode;
+//		//链表删除操作
+//		while (prev.next != null){
+//			if (prev.next.val == val){
+//				prev.next = prev.next.next;
+//			}
+//			else {
+//				prev = prev.next;
+//			}
+//		}
+//		return virtualNode.next;
+////		return head;  //不能返回head 因为前面没有对head节点做任何处理  返回的是原来的头节点
+//	}
+
+	/**
+	 * 方法三 递归
+	 * 对于给定的链表，首先对除了头节点head以外的节点进行删除操作，然后判断
+	 * head的节点值是否等于给定的val。如果head的节点值等于val，则head需要被删除，
+	 * 因此删除操作后的头节点为head.next；
+	 * 如果 head 的节点值不等于val，则head 保留，因此删除操作后的头节点还是head。
+	 * 上述过程是一个递归的过程。
+	 * 递归的终止条件是head 为空，此时直接返回head。
+	 * 当head不为空时，递归地进行删除操作，然后判断head的节点值是否等于val 并决定是否要删除head
+	 * @param head
+	 * @param val
+	 * @return
+	 */
+	public ListNode removeElements(ListNode head, int val) {
+		if (head == null){
+			return head;
+		}
+		head.next = removeElements(head.next,val);
+		return head.val == val ? head.next : head;
+	}
+}
+
+//runtime:1 ms
+//memory:42.4 MB

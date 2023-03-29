@@ -1,0 +1,30 @@
+### 解题思路
+
+双指针，一个从头遍历数组，一个从尾遍历，选择平方最大的数从数组尾部向前放入
+
+### 代码
+
+* java
+
+```java
+class Solution {
+    public int[] sortedSquares(int[] A) {
+        int len=A.length;
+        int[] a=new int[len];
+        int flag=len-1;
+        int left=0;
+        int right=len-1;
+        while(left<=right){
+            if(A[left]*A[left]>A[right]*A[right]){
+                a[flag--]=A[left]*A[left];
+                left++;
+            }else{
+                a[flag--]=A[right]*A[right];
+                right--;
+            }
+        }
+        return a;
+    }
+}
+```
+

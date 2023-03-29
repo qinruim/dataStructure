@@ -1,0 +1,29 @@
+* []
+
+```java
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        //base case
+        if(s.length() != t.length()) return false;
+        //计数数组
+        int[] count = new int[26];
+
+        //遍历s 然后在count上计数
+        for(int i = 0; i < s.length(); i++){
+            count[s.charAt(i) - 'a']++;
+        }
+
+        //遍历t后与count上的数组开始异或，如果出现0则两个数相等
+        for(int i = 0; i < t.length(); i++){
+
+            if(count[t.charAt(i) - 'a'] == 0) return false;
+
+            count[t.charAt(i) - 'a']--;
+        }
+
+        return true;
+
+    }
+}
+```
+

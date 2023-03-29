@@ -1,0 +1,81 @@
+class Solution {
+	private HashMap<Character, Character> map = new HashMap<>();
+
+	public Solution() {   	//用构造函数初始化map
+
+		map.put('(',')');
+		map.put('[',']');
+		map.put('{','}');
+	}
+
+	public boolean isValid(String s) {
+		/**
+		 * 思路1：
+		 * 遇见左括号 入栈
+		 * 遇见右括号
+		 *   如果栈为空，返回false
+		 *   如果栈不为空，弹出栈顶元素匹配，匹配失败返回false
+		 *   匹配成功继续遍历
+		 * 最后判断栈内是否为空  为空则true  否则false
+		 */
+
+//		Stack<Character> stack = new Stack<>();
+//		int length = s.length();
+//		for (int i = 0; i < length; i++) {
+//			char bracket = s.charAt(i);
+//			//左括号入栈
+//			if (bracket == '(' || bracket == '[' || bracket == '{'){
+//				stack.push(bracket);
+//			}
+//			else {
+//				//右括号且栈为空，false
+//				if (stack.isEmpty()) {
+//					return false;
+//				}
+//				//右括号且栈不为空
+//				char left = stack.pop();
+//				//弹出栈顶元素不匹配
+//				if (left == '(' && bracket != ')') {
+//					return false;
+//				}if (left == '[' && bracket != ']') {
+//					return false;
+//				}if (left == '{' && bracket != '}') {
+//					return false;
+//				}
+//			}
+//		}
+//		return stack.isEmpty();
+
+		/**
+		 * 思路2 用hashMap
+		 *
+		 */
+				Stack<Character> stack = new Stack<>();
+		int length = s.length();
+		for (int i = 0; i < length; i++) {
+			char bracket = s.charAt(i);
+			//左括号入栈
+			if (map.containsKey(bracket)){
+				stack.push(bracket);
+			}
+			else {
+				//右括号且栈为空，false
+				if (stack.isEmpty()) {
+					return false;
+				}
+				//右括号且栈不为空 弹出栈顶元素进行匹配
+				if (map.get(stack.pop()) != bracket){
+					return false;
+				}
+			}
+		}
+		return stack.isEmpty();
+
+
+	}
+}
+
+
+
+//runtime:2 ms
+//memory:39.4 MB

@@ -48,6 +48,7 @@
 
 package leetcode.editor.cn;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -66,6 +67,7 @@ public class P1_TwoSum{
 class Solution {
     public int[] twoSum(int[] nums, int target) {
 //		//暴力  两层循环  枚举数组中的每一个数 x，寻找数组中是否存在 target - x
+//		//（有多组和为target的话，返回一组即可）
 //		for (int i = 0; i < nums.length; i++) {
 //			for (int j = i + 1; j < nums.length; j++) {
 //				if (nums[i] + nums[j] == target){
@@ -75,10 +77,26 @@ class Solution {
 //		}
 //		return new int[0];
 
-		//哈希
-
-
-		return null;
+		//哈希  map存放遍历过的元素（元素值为key，下标作为value）
+		//遇到新的数x，去hashmap里面查看是否遍历过，是否存在匹配的 target - x
+		int[] result = new int[2];
+		if (nums == null || nums.length == 0){
+			return result;
+		}
+		HashMap<Integer, Integer> map = new HashMap<>();
+		for (int i = 0; i < nums.length; i++) {
+			//遍历数组，并在map中寻找是否存在匹配的值
+			int temp = target - nums[i];
+			if (map.containsKey(temp)){
+				//map中有匹配的值时，存入匹配值的下标和当前值的下标
+				result[0] = map.get(temp);
+				result[1] = i;
+				break;
+			}
+			//map没有匹配的值，将当前遍历到的值放入map中
+			map.put(nums[i],i);
+		}
+		return result;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
