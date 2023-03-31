@@ -1,0 +1,112 @@
+# 151.反转字符串中的单词
+
+1. 调用API
+2. 快慢指针：去除空格+reverse
+3. 快慢指针：reverse
+
+`调用API`
+
+* 
+
+```
+public String reverseWords(String s) {
+    String ss = s.trim();
+    List<String> list = Arrays.asList(ss.split("\\s+"));
+    Collections.reverse(list);
+    return String.join(" ", list);
+}
+```
+
+`快慢指针：两次遍历实现trim+reverse`
+
+* 
+
+```
+public String reverseWords(String s) {
+    char[] sarr = s.toCharArray();
+    int n = removeExtraSpaces(sarr);
+    reverseString(sarr, 0, n - 1);
+    for (int i = 0, j = 0; i < n; i++) {    //快慢指针
+        while (j < n && sarr[j] != ' ') {
+            j++;
+        }
+        reverseString(sarr, i, j - 1);
+        i = j++;
+    }
+    return new String(sarr, 0, n);
+}
+
+public int removeExtraSpaces(char[] s) {    //去除空格(双指针)
+    int l = 0;
+    for (int r = 0; r < s.length; r++) {
+        if (s[r] != ' ') {
+            if (l != 0) {
+                s[l++]=' ';
+            }
+            while (r < s.length && s[r] != ' ') {
+                s[l++] = s[r++];
+            }
+        }
+    }
+    return l;
+}
+
+public static void reverseString(char[] s, int start, int end) {    //reverse(双指针)
+    while (start < end) {
+        char t = s[start];
+        s[start] = s[end];
+        s[end] = t;
+        start++;
+        end--;
+    }
+}
+```
+
+`快慢指针：一次遍历reverse`
+
+* 
+
+```
+public static String reverseWords(String s) {
+    char[] sarr = s.toCharArray();
+    reverseString(sarr, 0, sarr.length - 1);
+    int now = 0, l, r = 0;    //now为已经完成的长度，l为单词首，r为单词末+1
+    while (r < sarr.length) {
+        l = r;
+        while (l < sarr.length && sarr[l] == ' ') {
+            l++;
+        }
+        if (l >= sarr.length) {    //l到尾后结束，不然"abc   "会出错
+            break;
+        }
+        r = l;
+        while (r < sarr.length && sarr[r] != ' ') {
+            r++;
+        }
+        reverseString2(sarr, now, r - 1);
+        now += r - l + 1;   //单词之间空格+1
+    }
+    return new String(sarr, 0, now - 1);    //去除最后一个空格
+}
+
+public static void reverseString(char[] s, int start, int end) {    //reverse(双指针)
+    while (start < end) {
+        char t = s[start];
+        s[start] = s[end];
+        s[end] = t;
+        start++;
+        end--;
+    }
+}
+
+public static void reverseString2(char[] s, int start, int end) {    //reverse" abc"时优化
+    while (start < end && s[end]!=' ') {
+        char t = s[start];
+        s[start] = s[end];
+        s[end] = t;
+        start++;
+        end--;
+    }
+}
+```
+

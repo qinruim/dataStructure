@@ -46,7 +46,7 @@ public class P344_ReverseString{
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public void reverseString(char[] s) {
-		// 定义两个指针（索引下标），分别从首位开始向中间移动，交换指针指向的值即可
+		// 定义两个指针（索引下标），分别从首尾开始向中间移动，交换指针指向的值即可
 		int head = 0,tail = s.length - 1;
 		char temp;
 		while (head < tail){
