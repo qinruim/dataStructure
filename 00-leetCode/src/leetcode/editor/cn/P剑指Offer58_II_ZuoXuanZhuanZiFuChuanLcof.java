@@ -36,26 +36,59 @@ package leetcode.editor.cn;
 public class P剑指Offer58_II_ZuoXuanZhuanZiFuChuanLcof{
 	 public static void main(String[] args) {
 	 	 //测试代码
-	 	 Solution solution = new P剑指Offer58_II_ZuoXuanZhuanZiFuChuanLcof().new Solution();
+	 	 Solution solution = new Solution();
+		  String s = "abcdefg";
+		  int k = 2;
+		 System.out.println(s);
+		 System.out.println(k);
+		 System.out.println(solution.reverseLeftWords(s, k));
+
 	 }
 	 
 //力扣代码提交区
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+static class Solution {
     public String reverseLeftWords(String s, int n) {
-		//将前n个字符看作一个整体a，剩余字符看作一个整体b，reverse（a，b）
+//		//暴力法
+//		//将前n个字符看作一个整体a，剩余字符看作一个整体b，reverse（a，b）
+//		//拆成两个字符串  再拼接
+//		int length = s.length();
+//		char[] chars1 = new char[n];
+//		char[] chars2 = new char[length - n];
+//
+//		char[] chars = s.toCharArray();
+//		//第一个字符串，前n个（0 ～ n-1）字符
+//		for (int i = 0; i < n; i++) {
+//			chars1[i] = chars[i];
+//		}
+//		//第二个字符串，剩下的字符（n ～ length-1）
+//		for (int i = n; i < length; i++) {
+//			chars2[i - n] = chars[i];
+//		}
+//		return new String(chars2) + new String(chars1);
+
+		/**
+		 * 法二：不能申请额外空间，只能在本串上操作
+		 * 反转区间为前n的子串
+		 * 反转区间为n到末尾的子串
+		 * 反转整个字符串
+		 */
+		int length = s.length();
 		char[] chars = s.toCharArray();
-		char[] newChars = new char[chars.length];
+		reverse(chars,0,n - 1);
+		reverse(chars,n,length - 1);
+		reverse(chars,0,length - 1);
+		return new String(chars);
+	}
 
-		for (int i = n + 1; i < chars.length; i++) {
-			newChars[i - (n + 1)] = chars[i];
+	private void reverse(char[] chars, int begin, int end) {
+		char temp;
+		while (begin < end){
+			temp = chars[begin];
+			chars[begin++] = chars[end];
+			chars[end--] = temp;
 		}
-		for (int i = 0; i < n; i++) {
-			newChars[i + n] = chars[i];
-		}
-
-		return new String(newChars);
-    }
+	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
