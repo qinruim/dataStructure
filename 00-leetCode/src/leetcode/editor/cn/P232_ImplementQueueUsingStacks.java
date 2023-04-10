@@ -90,25 +90,42 @@ class MyQueue {
     Stack<Integer> stackIn;
     Stack<Integer> stackOut;
     public MyQueue() {
-        stackIn = new Stack<>();
-        stackOut = new Stack<>();
+        stackIn = new Stack<>(); //负责进栈
+        stackOut = new Stack<>(); //负责出栈
     }
-    
-    public void push(int x) {
 
+    /**
+     * 入队（将元素x压入栈中 ）
+     * @param x
+     */
+    public void push(int x) {
+        stackIn.push(x);
     }
     
     public int pop() {
-        return 0;
+        dumpStackIn();
+        return stackOut.pop();
     }
     
     public int peek() {
-        return 0;
+        dumpStackIn();
+        return stackOut.peek();
     }
-    
+
     public boolean empty() {
-        return false;
+        return stackOut.isEmpty() && stackIn.isEmpty();
     }
+
+    //pop和peek的重复代码
+    private void dumpStackIn() {
+        //输出栈如果为空，就把进栈数据全部导入进来（
+        if (stackOut.isEmpty()){
+            while (!stackIn.isEmpty()){
+                stackOut.push(stackIn.pop());
+            }
+        }
+    }
+
 }
 
 /**
