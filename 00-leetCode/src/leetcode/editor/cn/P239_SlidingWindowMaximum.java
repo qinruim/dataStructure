@@ -103,6 +103,7 @@ class Solution {
 	 * 自定义单调队列
 	 */
 	class MyDeque{
+		//peek头部，getlast尾部   头部指先进入队列的
 		Deque<Integer> deque = new LinkedList<>();
 		//弹出元素时，比较当前要弹出的数值是否等于队列出口的数值，如果相等则弹出
 		//同时判断队列当前是否为空
