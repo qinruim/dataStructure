@@ -1,0 +1,55 @@
+> Problem: [71. 简化路径](https://leetcode.cn/problems/simplify-path/description/)
+
+[TOC]
+
+# 思路
+
+> 栈存储
+
+# 解题方法
+
+> 描述你的解题方法
+
+# 复杂度
+
+- 时间复杂度:
+
+> 添加时间复杂度, 示例： $O(n)$
+
+- 空间复杂度:
+
+> 添加空间复杂度, 示例： $O(n)$
+
+# Code
+
+* []
+
+```Java
+
+class Solution {
+    public String simplifyPath(String path) {
+        Deque<String> deque= new LinkedList<>();
+        String[] names = path.split("/");
+        for (String name : names) {
+            if(name.equals("..")){
+                if(!deque.isEmpty()){
+                    deque.pollLast();
+                }
+            }else if(name.length() > 0 && !".".equals(name)){
+                    deque.offerLast(name);
+            }
+        }
+        StringBuilder builder = new StringBuilder();
+        if(deque.isEmpty()){
+            builder.append("/");
+        }else{
+            while(!deque.isEmpty()){
+                builder.append("/");
+                builder.append(deque.pollFirst());
+            }
+        }
+        return builder.toString();
+    }
+}
+```
+

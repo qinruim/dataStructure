@@ -78,9 +78,9 @@ class Solution {
 //            return;
 //        }
 //        //中序 左中右
-//        traversal(root.left,result);
-//        result.add(root.val);
-//        traversal(root.right,result);
+//        traversal(root.left,result); //遍历左子树
+//        result.add(root.val); //根节点--中
+//        traversal(root.right,result);  //遍历右子树
 //    }
 }
 //leetcode submit region end(Prohibit modification and deletion)
