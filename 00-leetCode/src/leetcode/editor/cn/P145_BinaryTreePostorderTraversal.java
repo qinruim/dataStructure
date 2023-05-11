@@ -46,9 +46,13 @@ public class P145_BinaryTreePostorderTraversal{
  */
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
+        //递归
         List<Integer> result = new ArrayList<>();
         traversal(root,result);
 		return result;
+
+
+
     }
 
     private void traversal(TreeNode root, List<Integer> result) {
@@ -59,6 +63,8 @@ class Solution {
         traversal(root.left,result);
         traversal(root.right,result);
         result.add(root.val);
+
+
 
 
     }
