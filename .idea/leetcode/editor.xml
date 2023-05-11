@@ -223,6 +223,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P226_InvertBinaryTree.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P226_InvertBinaryTree.md" />
+              <option name="frontendQuestionId" value="leetcode.cn226" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P226_InvertBinaryTree.java" />
+              <option name="titleSlug" value="invert-binary-tree" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P232_ImplementQueueUsingStacks.java">
           <value>
             <LeetcodeEditor>
