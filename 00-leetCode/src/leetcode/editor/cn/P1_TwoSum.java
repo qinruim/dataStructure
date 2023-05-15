@@ -97,7 +97,16 @@ class Solution {
 			map.put(nums[i],i);
 		}
 		return result;
-    }
+
+
+		/**
+		 * 双指针 解决 n sum 问题
+		 * nums 中可能有多对儿元素之和都等于 target，请你的算法返回所有和为 target 的元素对儿，其中不能出现重复。
+		 */
+
+
+
+	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
