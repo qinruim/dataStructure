@@ -1,6 +1,5 @@
 package leetcode.editor.cn;
 
-import javax.xml.soap.Node;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
@@ -17,7 +16,10 @@ public class P144_BinaryTreePreorderTraversal{
 	 	 Solution solution = new P144_BinaryTreePreorderTraversal().new Solution();
 	 }
 
-	 public class TreeNode {
+    /**
+     * 定义二叉树节点
+     */
+    public class TreeNode {
       int val;
       TreeNode left;
       TreeNode right;
@@ -49,9 +51,9 @@ public class P144_BinaryTreePreorderTraversal{
  */
 class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
-//		List<Integer> result = new ArrayList<>();
-//		traversal(root,result);
-//		return result;
+//        List<Integer> result = new ArrayList<>();
+//        traversal(root, result);
+//        return result;
 
         //迭代法
         Deque<TreeNode> stack = new LinkedList<>();
@@ -77,14 +79,33 @@ class Solution {
         return result;
     }
 
-//	private void traversal(TreeNode root, List<Integer> list) {
-//		//终止条件
-//		if (root == null){return;}
-//		//单层递归逻辑 前序 中 左 右
-//		list.add(root.val);
-//		traversal(root.left,list);
-//		traversal(root.right,list);
-//	}
+    /**
+     *  1.确定递归函数的参数和返回值： 要打印前序遍历的各节点值，因此传入TreeNode对象存放节点；
+     *                           传入结果List 存放结果值
+     *                          此外不需要处理数据、不需要返回值；因此函数返回值是void
+     * @param root
+     * @param list
+     */
+//    private void traversal(TreeNode root, List<Integer> list) {
+//        /**
+//         *  2.确定终止条件:当前遍历节点为空说明到叶子节点了，本层递归终止
+//         *    所以如果当前遍历的这个节点是空，就直接return，终止递归
+//         */
+//        if (root == null){return;}
+//
+//
+//        /**
+//         * 3. 确定单层递归逻辑 前序 中 左 右
+//         */
+//        list.add(root.val);
+//        traversal(root.left,list);
+//        traversal(root.right,list);
+//    }
+
+//
+//    }
+
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

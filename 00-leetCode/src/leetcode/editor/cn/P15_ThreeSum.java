@@ -84,7 +84,7 @@ class Solution {
 				return result;
 			}
 
-			//a去重 不能用nums[i] == nums[i + 1]，这相当于在判断三元组内部有无重复元素
+			//a去重 不能用nums[i] == nums[i + 1]，这相当于判断三元组内部有无重复元素
 			if (i > 0 && nums[i] == nums[i - 1]){
 				continue;
 			}

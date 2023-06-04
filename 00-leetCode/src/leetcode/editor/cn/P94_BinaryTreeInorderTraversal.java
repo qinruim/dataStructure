@@ -57,7 +57,7 @@ class Solution {
         TreeNode cur = root; //指向root
         //当栈为空，或cur遍历到最后 即 cur=null 终止
         while (cur != null || !stack.isEmpty()){
-            //一路向左遍历到最左叶子节点，入栈。到左孩子为空（叶子节点）为止
+            //一路向左遍历到最左叶子节点，依次入栈。到左孩子为空（叶子节点）为止
             if (cur != null){
                 stack.push(cur);
                 cur = cur.left;
@@ -70,6 +70,7 @@ class Solution {
             }
 
         }
+
         return result;
     }
 
