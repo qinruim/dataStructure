@@ -17,7 +17,7 @@ public class P144_BinaryTreePreorderTraversal{
 	 }
 
     /**
-     * 定义二叉树节点
+     * 定义二叉树节点ss
      */
     public class TreeNode {
       int val;

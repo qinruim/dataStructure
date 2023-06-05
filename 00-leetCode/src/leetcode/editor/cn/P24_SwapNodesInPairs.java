@@ -48,6 +48,7 @@ public class P24_SwapNodesInPairs {
 		Solution solution = new P24_SwapNodesInPairs().new Solution();
 	}
 
+	// 11
 	public class ListNode {
 		int val;
 		ListNode next;
