@@ -63,28 +63,42 @@ class Solution {
 	 * @param deep
 	 */
 	private void levelorder2(TreeNode node, Integer deep) {
-		//到叶子节点跳出到上一层递归
-		if (node == null){
-			return;
+//		//到叶子节点跳出到上一层递归
+//		if (node == null){
+//			return;
+//		}
+//		//node！=null 时往下递归，递归深度（二叉树层级）++
+//		deep++;
+//
+//		//层级增加，当前层的节点增加，res的每一项是一个存放了一层元素的数组，因此用res的索引来界定层级
+//		//这个判断条件保证每一层只新建一个list加入res，因为后面要递归两次（左右子树）；否则每一层会新建双倍的空list加入res
+//		if (res.size() < deep){
+//			//存放当前层的节点
+//			List<Integer> currentLevelList = new ArrayList<>();
+//			//将存放当前层节点元素的数组加入结果二维数组
+//			res.add(currentLevelList);
+//		}
+//		//将 deep-1 层元素放入 currentLevelList 数组
+//		res.get(deep - 1).add(node.val);
+//
+//		//递归左右子树
+//		levelorder2(node.left,deep);
+//		levelorder2(node.right,deep);
+
+		if(node == null){return;}
+
+		//deep = 0
+		if (res.size() <= deep){
+			ArrayList<Integer> currentLevelList = new ArrayList<>();
+			res.add(currentLevelList);
 		}
-		//node！=null，递归深度（二叉树层级）++
+
+		//当前层元素加入current
+		res.get(deep).add(node.val);
+
 		deep++;
-
-		//层级增加，当前层的节点增加，res的每一项是一个存放了一层元素的数组，因此用res的索引来界定层级
-		//这个判断条件保证每一层只新建一个list加入res，因为后面要递归两次（左右子树）；否则每一层会新建双倍的空list加入res
-		if (res.size() < deep){
-			//存放当前层的节点
-			List<Integer> list = new ArrayList<>();
-			//将存放当前层节点元素的数组加入结果二维数组
-			res.add(list);
-		}
-		//将 deep-1 层元素放入数组
-		res.get(deep - 1).add(node.val);
-
-		//递归左右子树
 		levelorder2(node.left,deep);
 		levelorder2(node.right,deep);
-
 	}
 
 	/**
