@@ -61,7 +61,7 @@ class Solution {
 
 
 		//注意与求最大深度的区别   当有一个子树为空时，应该取不为空的最小高度
-		// （因为最小深度是从根节点到最近**叶子节点**的最短路径上的节点数量）
+		// （因为最小深度是从根节点到最近叶子节点的最短路径上的节点数量）
 		if (root.left == null) {
 			return rightMinHeight + 1;
 		}
@@ -69,7 +69,7 @@ class Solution {
 			return leftMinHeight + 1;
 		}
 		// 左右结点都不为null
-		return Math.min(leftMinHeight, rightMinHeight) + 1;
+		return 1+ Math.min(leftMinHeight, rightMinHeight);
 	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
