@@ -4,6 +4,15 @@ import java.util.Arrays;
 
 import static sort.Utils.swap;
 
+/**
+ * 空间复杂度 O(1)
+ * 无论有序、无序、逆序 都要n-1 趟处理
+ * 总共需要对比 （n-1）+(n-2)+,,,+1 = n(n-1)/2 次
+ * 元素交换次数 < n-1
+ * 时间复杂度 O(n^2)
+ * 稳定性：不稳定
+ *
+ */
 public class SelectionSort {
     public static void main(String[] args) {
         int a[] = {2,4,6,12,8,6,99,43,41};

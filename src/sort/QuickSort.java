@@ -2,57 +2,58 @@ package sort;
 
 import java.util.Arrays;
 
+/**
+ * 相当于n个节点的二叉树  递归层数为 log2（n）+ 1
+ * 时间复杂度 为 递归层数*n（每一层处理的元素不超过n）
+ * 所以最好和平均时间复杂度O（nlogn），最坏时间复杂度O（n^2）
+ *
+ * 空间复杂度=O(递归层数)
+ *
+ * 稳定性不好
+ *
+ * 算法表现主要取决于递归深度，若每次划分均匀，递归深度就低（二叉树高度，logn至n）
+ */
 public class QuickSort {
     public static void main(String[] args) {
         int a[] = {5,3,7,2,9,8,1,4};
-        quick(a,0,a.length - 1);
+
+        quickSort(a,0,a.length - 1);
+
+        System.out.println(Arrays.toString(a));
     }
 
-    /**
-     * 递归调用分区方法partition，完成排序
-     */
-    public static void quick(int[] a, int l, int h){
-        if (l >= h){
-            return;
+    private static void quickSort(int[] a, int low, int high) {
+        //结束条件
+        if (low < high) {
+            //单层逻辑
+            int pivotPosition = part(a, low, high); //划分左右子表  返回数轴最终位置
+            //递归左右子表
+            quickSort(a, low, pivotPosition - 1);
+            quickSort(a, pivotPosition + 1, high);
         }
-        //索引值
-        int p = partition(a, l, h);
-        //缩小分区
-        //左边分区范围确定
-        quick(a,l,p - 1);
-        //右边分区范围确定
-        quick(a,p + 1,h);
     }
 
-
     /**
-     * 单边循环分区方法   让基准点元素移动到正确位置
+     * 划分左右子表
      * @param a
-     * @param l 下边界
-     * @param h 上边界
+     * @param low
+     * @param high
      * @return
      */
-    private static int partition(int[] a, int l, int h) {
-        //以最右为基准点元素
-        int pv = a[h];
-        //i是待交换元素的目标索引
-        int i = l;
-        //寻找比基准点元素小的，与i交换
-        for (int j = l; j < h; j++) {
-            if (a[j] < pv){
-                if (i != j) {
-                    Utils.swap(a,i,j);
-                }
-                i++;
-            }
+    private static int part(int[] a, int low, int high) {
+        int pivot = a[low]; //第一个元素作为轴
+        while (low < high){ //双指针向中间搜索，确定轴最后位置
+            while (a[high] >= pivot && low < high){high--;} //high指向元素比较大，元素不动，左移high
+            a[low] = a[high];                               //high指向元素小于轴，移动
+            while (a[low] <= pivot && low < high){low++;}
+            a[high] = a[low];
         }
-        System.out.println(Arrays.toString(a)+"i:"+i);
-        //基准点与i交换
-        if (i != h) {
-            Utils.swap(a,h,i);
-        }
-        System.out.println(Arrays.toString(a)+"i:"+i);
-        //返回值代表基准点位置的索引，用来确定下一轮分区的边界
-        return i;
+
+        a[low] = pivot;  //轴元素最终存放位置（此时low = high）
+
+        return low;
     }
+
+
+
 }
