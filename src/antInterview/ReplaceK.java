@@ -6,7 +6,7 @@ public class ReplaceK {
         System.out.println(solution(2, nums));
     }
 
-    public static int solution(int k, int[] nums){
+    private static int solution(int k, int[] nums){
         int length = nums.length;
 
         int zeroCount = 0;

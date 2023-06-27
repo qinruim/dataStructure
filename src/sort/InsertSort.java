@@ -11,8 +11,8 @@ import java.util.Arrays;
 public class InsertSort {
     public static void main(String[] args) {
         int a[] = {2,4,6,12,8,6,99,43,41};
-        inset(a);
-//        insertSort(a);
+//        inset(a);
+        insertSort(a);
 
         System.out.println(Arrays.toString(a));
     }

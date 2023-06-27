@@ -73,74 +73,75 @@ public class P225_ImplementStackUsingQueues{
 	 
 //力扣代码提交区
 //leetcode submit region begin(Prohibit modification and deletion)
-//class MyStack {
-//    Queue<Integer> queue1; //和栈中元素保持一致
-//    Queue<Integer> queue2; //辅助队列,用来备份
-//    //初始化
-//    public MyStack() {
-//        queue1 = new LinkedList<>();
-//        queue2 = new LinkedList<>();
-//    }
-//
-//    public void push(int x) {
-//        //先放入辅助队列
-//        queue2.offer(x);
-//        //将1中元素全部放入2(最终目的是将2中元素顺序调整成栈的弹出顺序，再交给1)
-//        while (!queue1.isEmpty()){
-//            queue2.offer(queue1.poll());
-//        }
-//        //交换1和2，最终全部存入1
-//        Queue<Integer> tempQueue = queue1;
-//        queue1 = queue2;
-//        queue2 = tempQueue;
-//    }
-//
-//    public int pop() {
-//        //queue1中元素与栈中元素保持一致，关注queue即可
-//        return queue1.poll(); //poll()方法返回并移除容器前面的元素
-//    }
-//
-//    public int top() {
-//        return queue1.peek();
-//    }
-//
-//    public boolean empty() {
-//        return queue1.isEmpty();
-//    }
-//}
+class MyStack {
+    Queue<Integer> queue1; //和栈中元素保持一致
+    Queue<Integer> queue2; //辅助队列,用来备份
+    //初始化
+    public MyStack() {
+        queue1 = new LinkedList<>();
+        queue2 = new LinkedList<>();
+    }
+
+    public void push(int x) {
+        //先放入辅助队列
+        queue2.offer(x);
+        //将1中元素全部放入2(最终目的是将2中元素顺序调整成栈的弹出顺序，再交给1)
+        while (!queue1.isEmpty()){
+            queue2.offer(queue1.poll());
+        }
+        //交换1和2，最终全部存入1
+        Queue<Integer> tempQueue = queue1;
+        queue1 = queue2;
+        queue2 = tempQueue;
+    }
+
+    public int pop() {
+        //queue1中元素与栈中元素保持一致，关注queue即可
+        return queue1.poll(); //poll()方法返回并移除容器前面的元素
+    }
+
+    public int top() {
+        return queue1.peek();
+    }
+
+    public boolean empty() {
+        return queue1.isEmpty();
+    }
+}
 
     /**
      * 用一个队列模拟栈的操作
      * 只需要将队列中前 size-1 个元素弹出再添加到队列中，即可将队列中元素书讯调整成栈的顺序
      */
-    class MyStack {
-    Queue<Integer> queue;
-    //初始化
-    public MyStack() {
-       queue = new LinkedList<>();
-    }
-
-    public void push(int x) {
-       queue.offer(x);
-       int size = queue.size();
-       size--;
-       while (size-- > 0){
-           queue.offer(queue.poll());
-       }
-    }
-
-    public int pop() {
-       return queue.poll();
-    }
-
-    public int top() {
-        return queue.peek();
-    }
-
-    public boolean empty() {
-        return queue.isEmpty();
-    }
-}
+//    class MyStack {
+//        Queue<Integer> queue;
+//
+//        //初始化
+//        public MyStack() {
+//            queue = new LinkedList<>();
+//        }
+//
+//        public void push(int x) {
+//            queue.offer(x);
+//            int size = queue.size();
+//            size--;
+//            while (size-- > 0) {
+//                queue.offer(queue.poll());
+//            }
+//        }
+//
+//        public int pop() {
+//            return queue.poll();
+//        }
+//
+//        public int top() {
+//            return queue.peek();
+//        }
+//
+//        public boolean empty() {
+//            return queue.isEmpty();
+//        }
+//    }
 
 /**
  * Your MyStack object will be instantiated and called as such:

@@ -44,9 +44,9 @@ public class QuickSort {
         int pivot = a[low]; //第一个元素作为轴
         while (low < high){ //双指针向中间搜索，确定轴最后位置
             while (a[high] >= pivot && low < high){high--;} //high指向元素比较大，元素不动，左移high
-            a[low] = a[high];                               //high指向元素小于轴，移动
+            a[low] = a[high];                               //high指向元素小于轴，移动元素（low指向元素已经用pivot记录，后面处理）
             while (a[low] <= pivot && low < high){low++;}
-            a[high] = a[low];
+            a[high] = a[low];                               //前面high指向位置空出来了，移动
         }
 
         a[low] = pivot;  //轴元素最终存放位置（此时low = high）

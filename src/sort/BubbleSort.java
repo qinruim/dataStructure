@@ -18,15 +18,15 @@ public class BubbleSort {
     private static void bubbleSort(int[] a) {
         //从第length - 1 个开始  一直到第一个
         for (int j = a.length - 1; j > 0; j--) {
-            //每一轮找最大
+            //每一轮找j及之前最大的数沉底
             findMax(a, j);
 
         }
     }
 
-    private static void findMax(int[] a, int n) {
+    private static void findMax(int[] a, int j) {
         //找到第n个位置应该放的元素,并放过去
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < j; i++) {
             if (a[i] > a[i + 1]){
                 swap(a,i,i + 1);
             }

@@ -89,6 +89,7 @@ class Solution {
 				continue;
 			}
 
+			//确定一个数之后  相当于两数和，newTarget=target-a
 			int left = i + 1;
 			int right = nums.length - 1;
 
