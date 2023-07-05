@@ -51,9 +51,9 @@ class Solution {
 	public List<List<Integer>> res = new ArrayList<>();
     public List<List<Integer>> levelOrder(TreeNode root) {
 		//迭代法
-//		levelorder1(root);
+		levelorder1(root);
 		//递归法
-		levelorder2(root,0);
+//		levelorder2(root,0);
 		return res;
     }
 
@@ -87,7 +87,7 @@ class Solution {
 
 		if(node == null){return;}
 
-		//deep = 0
+		//deep = 0  deep记录当前所处层级
 		if (res.size() <= deep){
 			ArrayList<Integer> currentLevelList = new ArrayList<>();
 			res.add(currentLevelList);
@@ -103,6 +103,7 @@ class Solution {
 
 	/**
 	 * 迭代法
+	 * 队列用来控制分别处理每一层的数据，队列size就是当前层的元素个数
 	 * @param root
 	 */
 	private void levelorder1(TreeNode root) {
