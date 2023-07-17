@@ -58,8 +58,6 @@ class Solution {
 			return targetSum == 0;
 		}
 
-
-
 		//单层递归逻辑 左、右    不需要处理中的逻辑  顺序  无所谓
 		if (root.left != null){
 //			targetSum -= root.left.val;
