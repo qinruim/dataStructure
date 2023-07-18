@@ -9,7 +9,7 @@ package leetcode.editor.cn;
 class P570_ManagersWithAtLeast5DirectReports{
 	 public static void main(String[] args) {
 	 	 //测试代码
-	 	 Solution solution = new P570_ManagersWithAtLeast5DirectReports().new Solution();
+//	 	 Solution solution = new P570_ManagersWithAtLeast5DirectReports().new Solution();
 	 }
 
 //力扣代码提交区
