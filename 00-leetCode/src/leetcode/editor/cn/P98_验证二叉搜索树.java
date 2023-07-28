@@ -49,12 +49,13 @@ class P98_ValidateBinarySearchTree{
 	 */
 	class Solution {
     public boolean isValidBST(TreeNode root) {
+		if (root == null) return true;
 		ArrayList<Integer> list = new ArrayList<>();
 		//中序遍历二叉树转为数组（单调增）
 		getRootArray(root,list);
-		Integer[] rootArray = list.toArray(new Integer[list.size()]);
-		for (int i = 1; i < rootArray.length; i++) {
-			if (rootArray[i] <= rootArray[i - 1]){
+		//判断中序系列是否单调增
+		for (int i = 1; i < list.size(); i++) {
+			if (list.get(i) <= list.get(i - 1)){
 				return false;
 			}
 		}
