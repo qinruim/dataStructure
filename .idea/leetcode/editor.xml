@@ -674,6 +674,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P701_二叉搜索树中的插入操作.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P701_二叉搜索树中的插入操作.md" />
+              <option name="frontendQuestionId" value="leetcode.cn701" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P701_二叉搜索树中的插入操作.java" />
+              <option name="titleSlug" value="insert-into-a-binary-search-tree" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P704_BinarySearch.java">
           <value>
             <LeetcodeEditor>
