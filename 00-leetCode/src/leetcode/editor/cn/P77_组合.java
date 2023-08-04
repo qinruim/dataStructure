@@ -80,6 +80,10 @@ class Solution {
 		 * 3.单层搜索逻辑
 		 */
 		//从startIndex开始,每个节点做一个for循环，遍历剩余元素，将路径记录下来
+
+		//剪枝优化 已经有了path.size个元素，还需要k-path.size个，那么在n个元素的集合中，最多从 n - (k- path.size()) + 1 开始（左闭）
+		//再往后就不够了
+
 		for (int i = startIndex; i <= n - (k- path.size()) + 1; i++){
 			//单层搜索
 //			path.add(i);
