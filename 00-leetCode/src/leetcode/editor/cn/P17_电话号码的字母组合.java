@@ -1,6 +1,8 @@
 package leetcode.editor.cn;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,19 +21,22 @@ class P17_LetterCombinationsOfAPhoneNumber{
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
-		 List<String> result = new ArrayList<>();
+		 ArrayList<String> result = new ArrayList<>();
 		 StringBuilder path = new StringBuilder();
 
     public List<String> letterCombinations(String digits) {
-		//0-9数字跟子母的映射
+		//0-9数字跟字母的映射
 		String[] numToLetterMap = {"abc","def","ghi","jkl","mno","qprs","tuv","wxyz"};
+
+//		HashMap<Integer,String> map = new HashMap<>();
+//		map.put(2,"abc");
 
 		if (digits == null || digits.length() == 0){
 //			result.add("");
 			return result;
 		}
 
-		//index记录遍历到第几个数字了
+		//index记录遍历到digits中的第几个数字了
 		backTracking(digits,numToLetterMap,0);
 
 		return result;
@@ -45,7 +50,7 @@ class Solution {
 			return;
 		}
 
-		//当前index对应的字符串
+		//当前index指向数字对应的字符串
 		String str = numToLetterMap[digits.charAt(index) - '2'];
 		for (int i = 0; i <str.length(); i++) {
 			path.append(str.charAt(i));
