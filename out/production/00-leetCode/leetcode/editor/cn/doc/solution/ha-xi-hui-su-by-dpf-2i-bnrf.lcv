@@ -1,0 +1,47 @@
+### 解题思路
+
+回溯法解题，每一层递归用两层循环，一层循环拿来选择数字，一层拿来选择字母，数字和字母的映射关系用hashmap来构建。
+
+### 代码
+
+* cpp
+
+```cpp
+class Solution {
+public:
+    vector<string> vs;
+    map<char, vector<char>> m;
+    void set() {
+        m['2'] = { 'a','b','c' };
+        m['3'] = { 'd','e','f' };
+        m['4'] = { 'g','h','i' };
+        m['5'] = { 'j','k','l' };
+        m['6'] = { 'm','n','o' };
+        m['7'] = { 'p','q','r','s' };
+        m['8'] = { 't','u','v' };
+        m['9'] = { 'w','x','y','z' };
+    }
+   void backtraking(string path, string digits,int pcur) {
+        if(digits.size() == 0){
+            return;
+        }
+        if (path.size() == digits.size()) {
+            vs.push_back(path);
+            return;
+        }
+        for (int i = pcur; i < digits.size(); i++) {//选择数字digits
+            for (int j = 0; j < m[digits[i]].size(); j++) {//针对外层循环选用的数字，选择对应的几个字母
+                path += m[digits[i]][j];
+                backtraking(path, digits,i+1);
+                path.pop_back();//回溯，这里笔者也不清楚为什么非引用也要回退
+            }
+        }
+    }
+    vector<string> letterCombinations(string digits) {
+        set();
+        backtraking("", digits,0);
+        return vs;
+    }
+};
+```
+

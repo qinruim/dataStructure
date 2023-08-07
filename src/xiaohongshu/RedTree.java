@@ -62,8 +62,9 @@ public class RedTree {
     private static int dfs(int curr, int i1, HashMap<Integer, List<Integer>> connectMap, int[] weights, boolean[] visited) {
         int resCount = 0;
 
-        if(!visited[i])
 
+
+        return 0;
 
 
     }
