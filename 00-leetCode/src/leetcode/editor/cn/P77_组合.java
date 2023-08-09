@@ -31,35 +31,7 @@ class Solution {
 
 
     public List<List<Integer>> combine(int n, int k) {
-		//思路：两层for循环 一层遍历数组[1，n),第二层遍历[i,n]
-		//暴力for行不通
-//		List<List<Integer>> result = new ArrayList<>();
-//		if (n == 1){
-//			List<Integer> list = new ArrayList<>();
-//			list.add(1);
-//			result.add(list);
-//			return result;
-//		}else if (k == 1){
-//
-//		}
-//		for(int i = 1;i < n;i++){
-//			for (int j = i + 1;j <= n;j++){
-//				List<Integer> list = new ArrayList<>();
-//				list.add(i);
-//				list.add(j);
-//				result.add(list);
-//			}
-//		}
-//		return result;
-//    }
-
-		//回溯函数，返回值void，参数：
-		//树的路径就是一个组合(k个数的组合)
-//		int[] path= new int[k];
-
-
 		backTracking(n,k,startIndex);
-
 		return result;
 }
 
