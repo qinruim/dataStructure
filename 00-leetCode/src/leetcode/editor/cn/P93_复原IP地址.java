@@ -1,5 +1,6 @@
 package leetcode.editor.cn;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -84,7 +85,9 @@ class P93_RestoreIpAddresses {
                 }
             }
 
-//            if ((end - start + 1) >=3 && sNum > 255){
+//
+//
+//            if (new BigInteger(s.substring(start,end + 1)).compareTo(BigInteger.valueOf(255)) >= 0){
 //                return false;
 //            }
 

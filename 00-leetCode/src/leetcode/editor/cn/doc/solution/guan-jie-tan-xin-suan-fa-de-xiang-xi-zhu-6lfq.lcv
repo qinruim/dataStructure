@@ -1,0 +1,38 @@
+自己记录下，如有问题请批评指正。
+
+* c++
+
+```c++
+class Solution {
+public:
+    int wiggleMaxLength(vector<int>& nums) {
+        int n = nums.size();
+        // n == 0 || n == 1 的时候就是答案直接返回，当 n== 2 的时候就要判断两个数是否相等
+        if (n < 2) return n;
+
+        // preDiff 记录前一个变化
+        int preDiff = nums[1] - nums[0];
+        // eg. [1, 1] 能作为摆动序列的最长子序列长度只能为1 [1];
+        int res = preDiff != 0 ? 2 : 1;
+        
+        // 设置一个变量curDiff记录当前的变化
+        int curDiff = 0;
+        // 从 i == 2 时 遍历当前数组 为什么是从i == 2 ? 因为 i < 2 的时候上面已经判断完了
+        for (int i = 2; i < n; i++)
+        {
+            curDiff = nums[i] - nums[i - 1];
+            // preDiff 判断的时候要 >= || <= 是因为在数组开头的时候存在等于的情况而我们要记录进去
+            // if来判断每次有正负方向变化的时候才会记录。并且更新preDiff 为下次判断做准备，
+            // 这样才能做到交替摆动
+            if ((preDiff >= 0 && curDiff < 0) || (preDiff <= 0 && curDiff > 0))
+            {
+                res++;
+                preDiff = curDiff;
+            }
+            // 不满足判断条件代表没有方向变化 或者方向变化相同 则不计入子序列中
+        }
+        return res;
+    }
+};
+```
+

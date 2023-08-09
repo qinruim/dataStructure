@@ -1,0 +1,33 @@
+![image.png](https://pic.leetcode.cn/1674827679-wszJZr-image.png)
+
+# 解题思路
+
+首先需要明确摆动数列的概念，用简单些的话说就是当数组内出现一单调递增（单调递进）紧接着单调递减（单调递增），就叫做一个摆动，此时记录长度为3。需要注意的是默认计数器为1，因为数组最后一定有一个峰值即一个摆动，但我们却记录不上，所以需要默认值为1，接下来设置两个指针进行模拟规则就可以了。
+
+# 代码实现
+
+* 
+
+```
+class Solution {
+public:
+    int wiggleMaxLength(vector<int>& nums) {
+        //贪心
+        if (nums.size() == 1) return 1;
+        if (nums.size() == 2 && nums[0] != nums[1]) return 2;
+        //result = 1作用是默认数组最后一定有一个峰值
+        int preDiff = 0, curDiff = 0, result = 1;
+        for (int i = 0; i < nums.size(); ++i) {
+            if (i + 1 < nums.size()) {
+                curDiff = nums[i + 1] - nums[i];
+            }
+            if ((preDiff <= 0 && curDiff > 0) || (preDiff >= 0 && curDiff < 0)) {
+                ++result;
+                preDiff = curDiff;
+            }
+        } 
+        return result;
+    }
+};
+```
+
