@@ -23,7 +23,24 @@ public class ThreadPoolExecutorDemo {
                 KEEP_ALIVE_TIME,
                 TimeUnit.MILLISECONDS,
                 new ArrayBlockingQueue<>(QUEUE_CAPACITY),
-                new ThreadPoolExecutor.CallerRunsPolicy());
+                //自定义线程工厂给线程池命名
+                new NamingThreadFactory(Executors.defaultThreadFactory(),"父任务线程池"),
+//                new NamingThreadFactory("父任务线程池"),
+                new ThreadPoolExecutor.CallerRunsPolicy()
+                );
+
+        //不同任务用不同的线程池，父子任务用一个线程池可能造成死锁
+        ThreadPoolExecutor subPoolExecutor = new ThreadPoolExecutor(
+                CORE_POOL_SIZE,
+                MAX_POOL_SIZE,
+                QUEUE_CAPACITY,
+                TimeUnit.MILLISECONDS,
+                new ArrayBlockingQueue<>(QUEUE_CAPACITY),
+                //也可以使用guava包的
+                new NamingThreadFactory(Executors.defaultThreadFactory(),"子任务线程池"),
+                new ThreadPoolExecutor.AbortPolicy()
+        );
+
 
         //创建MyRunnable的实例对象（任务），交给线程池执行
 //        for (int i = 0; i < 10; i++) {
@@ -61,7 +78,7 @@ public class ThreadPoolExecutorDemo {
 //                }
 //            }).start();
 
-            threadPoolExecutor.execute(() -> {
+            subPoolExecutor.execute(() -> {
                 try {
                     String result = (String) future.get();
                     System.out.println(Thread.currentThread().getName() + " result: " + result);
@@ -76,9 +93,10 @@ public class ThreadPoolExecutorDemo {
 
         //终止线程池
         threadPoolExecutor.shutdown();
+        subPoolExecutor.shutdown();
 
         //保证线程池结束后才执行后面的
-        while (!threadPoolExecutor.isTerminated()){}
+        while (!threadPoolExecutor.isTerminated() && !subPoolExecutor.isTerminated()){}
         System.out.println("线程全部执行完成");
 
 
