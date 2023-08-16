@@ -1,7 +1,23 @@
 package practice.techPractice.sort;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
+/**
+ * 两两比较，前面的比后面大，就交换  从第一对比较到最后一对
+ * 进行一次就将最大的沉底了
+ *
+ * 如此沉底n-1次，即可完成
+ *
+ * 两层for循环
+ *
+ *
+ * 稳定性：稳定
+ * 时间复杂度：最佳：O(n) ，最差：O(n2)， 平均：O(n2)
+ * 空间复杂度：O(1)
+ * 排序方式：In-place
+ *
+ */
 public class BubbleSort {
     public static void main(String[] args) {
         int a[] = {2,4,6,12,8,6,99,43,100};
@@ -14,55 +30,30 @@ public class BubbleSort {
     }
 
     private static void bubbleSort(int[] a) {
-        //从第length - 1 个开始  一直到第一个
-        for (int j = a.length - 1; j > 0; j--) {
-            //每一轮找j及之前最大的数沉底
-            findMax(a, j);
+        //沉底 n-1 次
+        for (int i = 1; i < a.length; i++) {
+            //小优化 如果有一轮没有发生交换（flag没有变） 说明已经排序完成  后面就不用继续了
+            boolean flag = true;
 
-        }
-    }
-
-    private static void findMax(int[] a, int j) {
-        //找到第n个位置应该放的元素,并放过去
-        for (int i = 0; i < j; i++) {
-            if (a[i] > a[i + 1]){
-                Utils.swap(a,i,i + 1);
-            }
-        }
-
-    }
-
-    private static void bubble(int[] a) {
-        //每轮冒泡的比较次数n，初始为length-1
-        int n = a.length - 1;
-
-        while (true) {
-            //记录最后一次交换的索引位置，可以作为下一轮冒泡的比较次数
-            // (在这个索引之后的元素是已经沉底的，因此这个索引即下一轮比较次数)
-            int lastSwapIndex = 0;
-
-
-            //一轮冒泡
-            for (int i = 0; i < n; i++) {
-                //将大的沉底
-                if (a[i] > a[i + 1]){
-                    Utils.swap(a,i,i + 1);
-                    lastSwapIndex = i;
+            for (int j = 0; j < a.length - i; j++) {
+                if (a[j] > a[j + 1]){
+                    Utils.swap(a,j,j + 1);
+                    flag = false;
                 }
             }
 
-
-            //每轮冒泡时，最后一次交换索引可以作为下一轮冒泡的比较次数
-            n = lastSwapIndex;
-            //到n为0  即索引为0后面的元素已将全部沉底，数组已经有序
-            if(n == 0){
+            if (flag){
                 break;
             }
 
+
         }
 
-
     }
+
+
+
+
 
 
 }

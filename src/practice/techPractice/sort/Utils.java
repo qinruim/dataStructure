@@ -6,4 +6,10 @@ public class Utils {
         a[i] = a[j];
         a[j] = t;
     }
+    public static void swapInt(int i, int j) {
+        int t = i;
+        i = j;
+        j = t;
+    }
+
 }
