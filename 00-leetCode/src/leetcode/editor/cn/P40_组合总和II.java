@@ -47,12 +47,14 @@ class Solution {
 
 		for (int i = startIndex; i < candidates.length; i++) {
 
-			//used数组去重
-//			if (i >=1 && used[i -1] == false && candidates[i] == candidates[i - 1]){
+			//使用used数组
+			//树层去重 即used[i-1]回溯了，是false，且nums[i] == nums[i-1],剪枝
+//			if (i > 0 && !used[i -1] && candidates[i] == candidates[i - 1]){
 //				continue;
 //			}
 
-			//用startIndex去重，即跳过同一层用过的元素,即i>startIndex(遍历到该层后面的元素出现了重复)
+			//用startIndex去重，跳过同一层用过的元素
+			// 即i>startIndex时，说明同一层开始遍历后面的元素，当重复，即跳过
 			if (i > startIndex && candidates[i] == candidates[i - 1]){
 				continue;
 			}
