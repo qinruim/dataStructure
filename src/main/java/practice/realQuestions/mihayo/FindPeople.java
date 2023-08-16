@@ -1,4 +1,4 @@
-package practice.mihayou;
+package practice.realQuestions.mihayo;
 
 import java.util.Scanner;
 

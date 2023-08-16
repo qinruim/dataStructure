@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/00-leetCode/00-leetCode.iml" filepath="$PROJECT_DIR$/00-leetCode/00-leetCode.iml" />
-      <module fileurl="file://$PROJECT_DIR$/DataStrucAndAlgo.iml" filepath="$PROJECT_DIR$/DataStrucAndAlgo.iml" />
     </modules>
   </component>
 </project>

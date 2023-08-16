@@ -1,4 +1,4 @@
-package practice.dajiang;
+package practice.realQuestions.dajiang;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
