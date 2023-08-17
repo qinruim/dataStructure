@@ -42,6 +42,7 @@ class P51_NQueens {
             }
 
             //遍历每行n个格子 递归
+            //棋盘的宽度就是for循环的长度，递归的深度就是棋盘的高度
             for (int col = 0; col < n; col++) {
                 if (isValid(row, col, n, chessBoard)) {
                     chessBoard[row][col] = 'Q';
