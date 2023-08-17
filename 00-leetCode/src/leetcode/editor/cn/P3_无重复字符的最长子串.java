@@ -16,6 +16,8 @@ public class P3_LongestSubstringWithoutRepeatingCharacters{
 class Solution {
     public int lengthOfLongestSubstring(String s) {
 
+
+		return 0;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
