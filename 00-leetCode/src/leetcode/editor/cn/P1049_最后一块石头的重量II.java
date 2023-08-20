@@ -44,7 +44,7 @@ class Solution {
 
 		int bagSize = sum / 2;
 
-		//i时物品 j是背包容量
+		//i是物品 j是背包容量
 		int[][] dp = new int[stones.length][bagSize + 1];
 		//初始化
 		for (int j = stones[0]; j < bagSize + 1; j++) {

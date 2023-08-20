@@ -69,7 +69,7 @@ class Solution {
 		//dp[target] == target ,背包装满
 		//因为 dp[target] 不可能比target大，大的话说明有物品的价值大于容量  但是这个题中物品的价值始终等于容量
 		//也就是说 dp[i]顶多等于i  或者没装满 就小于i
-		return dp[target] ==target;
+		return dp[target] == target;
 	}
 
 
