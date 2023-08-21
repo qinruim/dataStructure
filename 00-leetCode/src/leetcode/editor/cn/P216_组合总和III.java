@@ -21,10 +21,10 @@ class P216_CombinationSumIii{
 //力扣代码提交区
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-		 List<List<Integer>> result = new ArrayList<>();
-		 LinkedList<Integer> path = new LinkedList<>();
+	List<List<Integer>> result = new ArrayList<>();
+	LinkedList<Integer> path = new LinkedList<>();
 
-    public List<List<Integer>> combinationSum3(int k, int n) {
+	public List<List<Integer>> combinationSum3(int k, int n) {
 		//思路：找出1到9里面，所有k个数的组合，判断这个组合之和是否等于n
 
 		backTracking(n,k,1);
