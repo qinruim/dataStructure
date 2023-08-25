@@ -1,0 +1,781 @@
+## 解题思路
+
+官方题解有这么一段话：
+
+**双指针法错在哪里？** 也许有同学看到这道题目的第一反应是使用双指针法解决这个问题，指针 $p_1$ 一开始指向 $s_1$ 的头部，指针 $p_2$ 一开始指向 $s_2$ 的头部，指针 $p_3$ 指向 $s_3$ 的头部，每次观察 $p_1$ 和 $p_2$ 指向的元素哪一个和 $p_3$ 指向的元素相等，相等则匹配并后移指针。样例就是一个很好的反例，用这种方法判断 $s_1 = {\rm aabcc}$，$s_2 = {\rm dbbca}$，$s_3 = {\rm aadbbcbcac}$ 时，得到的结果是 $\rm False$，实际应该是 $\rm True$。
+![leetcode_bg.jpeg](https://pic.leetcode-cn.com/1628245790-gizmHG-leetcode_bg.jpeg)
+双指针法果真不行吗？我就不信这个邪，果断写一版双指针：
+
+### 探索：双指针 【解答错误，仅通过部分测试用例】
+
+* []
+
+```C++
+class Solution {
+public:
+    bool isInterleave(string s1, string s2, string s3) {
+        int p1 = 0, p2 = 0, p3 = 0;
+        int n1 = (int)s1.size(), n2 = (int)s2.size(), n3 = (int)s3.size();
+        if (n1+n2!=n3) return false;
+        while (p1<n1&&p2<n2&&p3<n3) {
+            while (s1[p1] == s3[p3]) {
+                p1++; p3++;
+            }
+            while (s2[p2] == s3[p3]) {
+                p2++; p3++;
+            }
+            if (p1<n1&&p2<n2&&p3<n3 &&(s1[p1] != s3[p3])&&(s2[p2] != s3[p3])) break;
+        }
+        if (p1==n1&&p2==n2&&p3==n3) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+};
+```
+
+* []
+
+```Java
+class Solution {
+    public boolean isInterleave(String s1, String s2, String s3) {
+        int p1 = 0, p2 = 0, p3 = 0;
+        int n1 = s1.length(), n2 = s2.length(), n3 = s3.length();
+        if (n1+n2!=n3) return false;
+        while (p1<n1 && p2<n2 && p3<n3) {
+            while (p1<n1 && p3<n3 && s1.charAt(p1) == s3.charAt(p3)) {
+                p1++; p3++;
+            }
+            while (p2<n2 && p3<n3 && s2.charAt(p2) == s3.charAt(p3)) {
+                p2++; p3++;
+            }
+            if (p1<n1&&p2<n2&&p3<n3 &&(s1.charAt(p1) != s3.charAt(p3))&&(s2.charAt(p2) != s3.charAt(p3))) break;
+        }
+        if (p1==n1&&p2==n2&&p3==n3) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+```
+
+不出官方所料，悲剧了：
+![Screen Shot 2021-08-03 at 2.32.31 AM.png](https://pic.leetcode-cn.com/1627934175-KUQVQF-Screen%20Shot%202021-08-03%20at%202.32.31%20AM.png)
+错在哪里？我果断打断点分析，发现 $p_1$ 没到达 $s_1$ 末尾啊，少了一个 $c$ ，当然不对了，代码有问题，改！
+如果没有到末尾就继续遍历，于是有了第二版双指针代码：
+
+### 探索：双指针优化 【解答错误，仅通过部分测试用例】
+
+* []
+
+```C++
+class Solution {
+public:
+    bool isInterleave(string s1, string s2, string s3) {
+        int p1 = 0, p2 = 0, p3 = 0;
+        int n1 = (int)s1.size(), n2 = (int)s2.size(), n3 = (int)s3.size();
+        if (n1+n2!=n3) return false;
+        while (p1<n1&&p2<n2&&p3<n3) {
+            while (s1[p1] == s3[p3]) {
+                if(p1<n1&&p3<n3) {
+                    p1++; p3++;
+                } else {
+                    break;
+                }
+            }
+            while (s2[p2] == s3[p3]) {
+                if(p2<n2&&p3<n3) {
+                    p2++; p3++;
+                } else {
+                    break;
+                }
+            }
+            if (p1<n1&&p2<n2&&p3<n3 &&(s1[p1] != s3[p3])&&(s2[p2] != s3[p3])) break;
+        }
+        if (p1==n1) {
+            while (p2<n2&&p3<n3) {
+                while (s2[p2] == s3[p3]) {
+                    if(p2<n2&&p3<n3) {
+                        p2++; p3++;
+                    } else {
+                        break;
+                    }
+                }
+                if (p2<n2&&p3<n3&&(s2[p2] != s3[p3])) break;
+            }
+        }
+        if (p2==n2) {
+            while (p1<n1&&p3<n3) {
+                while (s1[p1] == s3[p3]) {
+                    if(p1<n1&&p3<n3) {
+                        p1++; p3++;
+                    } else {
+                        break;
+                    }
+                }
+                if (p1<n1&&p3<n3&&(s1[p1] != s3[p3])) break;
+            }
+        }
+        if (p1==n1&&p2==n2&&p3==n3) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+};
+```
+
+* []
+
+```Java
+class Solution {
+    public boolean isInterleave(String s1, String s2, String s3) {
+        int p1 = 0, p2 = 0, p3 = 0;
+        int n1 = s1.length(), n2 = s2.length(), n3 = s3.length();
+        if (n1+n2!=n3) return false;
+        while (p1<n1 && p2<n2 && p3<n3) {
+            while (p1<n1 && p3<n3 && s1.charAt(p1) == s3.charAt(p3)) {
+                if(p1<n1&&p3<n3) {
+                    p1++; p3++;
+                } else {
+                    break;
+                }
+            }
+            while (p2<n2 && p3<n3 && s2.charAt(p2) == s3.charAt(p3)) {
+                if(p2<n2&&p3<n3) {
+                    p2++; p3++;
+                } else {
+                    break;
+                }
+            }
+            if (p1<n1 && p2<n2 && p3<n3 &&(s1.charAt(p1) != s3.charAt(p3))&&(s2.charAt(p2) != s3.charAt(p3))) break;
+        }
+        if (p1==n1) {
+            while (p2<n2 && p3<n3) {
+                while (p2<n2 && p3<n3 && s2.charAt(p2) == s3.charAt(p3)) {
+                    if(p2<n2&&p3<n3) {
+                        p2++; p3++;
+                    } else {
+                        break;
+                    }
+                }
+                if (p2<n2&&p3<n3&&(s2.charAt(p2) != s3.charAt(p3))) break;
+            }
+        }
+        if (p2==n2) {
+            while (p1<n1 && p3<n3) {
+                while (p1<n1 && p3<n3 && s1.charAt(p1) == s3.charAt(p3)) {
+                    if(p1<n1&&p3<n3) {
+                        p1++; p3++;
+                    } else {
+                        break;
+                    }
+                }
+                if (p1<n1 && p3<n3 && (s1.charAt(p1) != s3.charAt(p3))) break;
+            }
+        }
+        if (p1==n1 && p2==n2 && p3==n3) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+```
+
+之前的测试用例完美通过，$p_1$到达$s_1$末尾，**这么说明官方说明是错的！双指针能通过这个 case ！**
+但是新问题来了：
+![Screen Shot 2021-08-03 at 12.26.52 AM.png](https://pic.leetcode-cn.com/1627934501-NvLKZs-Screen%20Shot%202021-08-03%20at%2012.26.52%20AM.png)
+
+什么鬼？原来是双指针里的贪心思路作怪，这个测试用例里面 $s_1 = {\rm aa}$，$s_2 = {\rm ab}$，$s_3 = {\rm aaba}$，连续用 $s_1$ 的 $a$ 就无法取到 $s_2$ 的 $b$ 了，哎，看来这里不能贪心，贪心大多用于单调情况，这里要分情况讨论了，当 $p_1$ 和 $p_2$ 均能够匹配时，分两个分支继续搜索。
+那么，如何处理需要分情况讨论的问题呢，常用方法有搜索（深度优先搜索、广度优先搜索等），动态规划（自顶向下动态规划、自底向上动态规划等）等，我们依次把这几种最常用的处理方法都尝试一遍。
+所以我现在有个观点，不知道对不对，大家也可以讨论下，那就是**做题不要上来就找最优解，思考和探索的过程是非常必要的**。力扣很多无法通过的case设计是非常精妙的，通过跑出错误case，你可以发现自己思维上的漏洞，这样锻炼的好处就是，哪怕你拿到一道新题，你也可以循序渐进的展开思考。
+
+### 方法一：深度优先搜索（剪枝） 【通过】
+
+思路很简单，$s_3$ 每个字符在两个字符串$s_1$、$s_2$ 中分别进行匹配，匹配就继续搜，不匹配就剪枝。
+备注：visited数组也可以记为seen数组，不同程序员命名习惯不同，标记是否搜索到。
+
+* []
+
+```C++
+class Solution {
+public:
+    void dfs(string& s1, string& s2, string& s3, int p1, int p2, int p3, vector<vector<int>>&visited) {
+        if (visited[p1][p2]) return; //已经访问过，直接返回，防止重复遍历
+        if (p1<s1.length()&&p2<s2.length()) { //p1和p2都没有到达终点
+            if (s3[p3]==s1[p1]&&s3[p3]==s2[p2]) { //s1[p1]和s2[p2]都匹配s3[p3]，分枝DFS
+                dfs(s1, s2, s3, p1+1, p2, p3+1, visited);
+                dfs(s1, s2, s3, p1, p2+1, p3+1, visited);
+            } else if (s3[p3]==s1[p1]) { //只有s1[p1]匹配s3[p3]，单枝DFS
+                dfs(s1, s2, s3, p1+1, p2, p3+1, visited);
+            } else if (s3[p3]==s2[p2]) { //只有s2[p2]匹配s3[p3]，单枝DFS
+                dfs(s1, s2, s3, p1, p2+1, p3+1, visited);
+            } else { //都不匹配，剪枝
+                return;
+            }
+        } else if (p1<s1.length()) { //p2到达终点
+            if (s3[p3]==s1[p1]) { //s1[p1]匹配s3[p3]，单枝DFS
+                dfs(s1, s2, s3, p1+1, p2, p3+1, visited);
+            } else {
+                return; //s1[p1]不匹配，剪枝
+            }
+        } else if (p2<s2.length()) { //p1到达终点
+            if (s3[p3]==s2[p2]) { //s2[p2]匹配s3[p3]，单枝DFS
+                dfs(s1, s2, s3, p1, p2+1, p3+1, visited);
+            } else {
+                return; //s2[p2]不匹配，剪枝
+            }
+        }
+        visited[p1][p2] = 1; //标记p1,p2所在当前位置已经被访问，这个标记放前面后面都可以
+    }
+    bool isInterleave(string s1, string s2, string s3) {
+        int n1 = (int)s1.size(), n2 = (int)s2.size(), n3 = (int)s3.size();
+        if (n1+n2!=n3) return false;
+        vector<vector<int>>visited(n1+1,vector<int>(n2+1));
+        dfs(s1, s2, s3, 0, 0, 0, visited);
+        return visited[n1][n2]; //检测终点是否被访问，即终点是否能够到达
+    }
+};
+```
+
+* []
+
+```Java
+class Solution {
+    public void dfs(String s1, String s2, String s3, int p1, int p2, int p3, boolean[][]visited) {
+        if (visited[p1][p2]) return; //已经访问过，直接返回，防止重复遍历
+        if (p1<s1.length()&&p2<s2.length()) { //p1和p2都没有到达终点
+            if (s3.charAt(p3)==s1.charAt(p1)&&s3.charAt(p3)==s2.charAt(p2)) { //s1[p1]和s2[p2]都匹配s3[p3]，分枝DFS
+                dfs(s1, s2, s3, p1+1, p2, p3+1, visited);
+                dfs(s1, s2, s3, p1, p2+1, p3+1, visited);
+            } else if (s3.charAt(p3)==s1.charAt(p1)) { //只有s1[p1]匹配s3[p3]，单枝DFS
+                dfs(s1, s2, s3, p1+1, p2, p3+1, visited);
+            } else if (s3.charAt(p3)==s2.charAt(p2)) { //只有s2[p2]匹配s3[p3]，单枝DFS
+                dfs(s1, s2, s3, p1, p2+1, p3+1, visited);
+            } else { //都不匹配，剪枝
+                return;
+            }
+        } else if (p1<s1.length()) { //p2到达终点
+            if (s3.charAt(p3)==s1.charAt(p1)) { //s1[p1]匹配s3[p3]，单枝DFS
+                dfs(s1, s2, s3, p1+1, p2, p3+1, visited);
+            } else {
+                return; //s1[p1]不匹配，剪枝
+            }
+        } else if (p2<s2.length()) { //p1到达终点
+            if (s3.charAt(p3)==s2.charAt(p2)) { //s2[p2]匹配s3[p3]，单枝DFS
+                dfs(s1, s2, s3, p1, p2+1, p3+1, visited);
+            } else {
+                return; //s2[p2]不匹配，剪枝
+            }
+        }
+        visited[p1][p2] = true; //标记p1,p2所在当前位置已经被访问，这个标记放前面后面都可以
+    }
+    public boolean isInterleave(String s1, String s2, String s3) {
+        int n1 = s1.length(), n2 = s2.length(), n3 = s3.length();
+        if (n1+n2!=n3) return false;
+        boolean[][] visited = new boolean[n1 + 1][n2 + 1];
+        dfs(s1, s2, s3, 0, 0, 0, visited);
+        return visited[n1][n2]; //检测终点是否被访问，即终点是否能够到达
+    }
+}
+```
+
+* []
+
+```Swift
+class Solution {
+    func dfs(_ s1: Array<Character>, _ s2: Array<Character>, _ s3: Array<Character>, _ p1: Int, _ p2: Int, _ p3: Int, _ visited: inout [[Bool]]) {
+        if visited[p1][p2]==true {
+            return  //已经访问过，直接返回，防止重复遍历
+        }
+        if p1<s1.count && p2<s2.count { //p1和p2都没有到达终点
+            if s3[p3]==s1[p1]&&s3[p3]==s2[p2] { //s1[p1]和s2[p2]都匹配s3[p3]，分枝DFS
+                dfs(s1, s2, s3, p1+1, p2, p3+1, &visited)
+                dfs(s1, s2, s3, p1, p2+1, p3+1, &visited)
+            } else if s3[p3]==s1[p1] { //只有s1[p1]匹配s3[p3]，单枝DFS
+                dfs(s1, s2, s3, p1+1, p2, p3+1, &visited)
+            } else if s3[p3]==s2[p2] { //只有s2[p2]匹配s3[p3]，单枝DFS
+                dfs(s1, s2, s3, p1, p2+1, p3+1, &visited)
+            } else { //都不匹配，剪枝
+                return
+            }
+        } else if p1<s1.count { //p2到达终点
+            if s3[p3]==s1[p1] { //s1[p1]匹配s3[p3]，单枝DFS
+                dfs(s1, s2, s3, p1+1, p2, p3+1, &visited)
+            } else {
+                return //s1[p1]不匹配，剪枝
+            }
+        } else if p2<s2.count { //p1到达终点
+            if s3[p3]==s2[p2] { //s2[p2]匹配s3[p3]，单枝DFS
+                dfs(s1, s2, s3, p1, p2+1, p3+1, &visited)
+            } else {
+                return //s2[p2]不匹配，剪枝
+            }
+        }
+        visited[p1][p2] = true //标记p1,p2所在当前位置已经被访问，这个标记放前面后面都可以
+    }
+    func isInterleave(_ s1: String, _ s2: String, _ s3: String) -> Bool {
+        let s1 = Array(s1), s2 = Array(s2), s3 = Array(s3), n1 = s1.count, n2 = s2.count, n3=s3.count
+        guard n1 + n2 == n3 else {
+            return false
+        }
+        var visited = [[Bool]](repeating: [Bool](repeating: false, count: n2 + 1), count: n1 + 1)
+        dfs(s1, s2, s3, 0, 0, 0, &visited)
+        return visited[n1][n2] //检测终点是否被访问，即终点是否能够到达
+    }
+}
+```
+
+* []
+
+```Kotlin
+class Solution {
+    fun dfs(s1: String, s2: String, s3: String, p1: Int, p2: Int, p3: Int, visited: Array<BooleanArray>):Unit{
+        if (visited[p1][p2]) return; //已经访问过，直接返回，防止重复遍历
+        if (p1<s1.length && p2<s2.length) { //p1和p2都没有到达终点
+            if (s3[p3]==s1[p1]&&s3[p3]==s2[p2]) { //s1[p1]和s2[p2]都匹配s3[p3]，分枝DFS
+                dfs(s1, s2, s3, p1+1, p2, p3+1, visited);
+                dfs(s1, s2, s3, p1, p2+1, p3+1, visited);
+            } else if (s3[p3]==s1[p1]) { //只有s1[p1]匹配s3[p3]，单枝DFS
+                dfs(s1, s2, s3, p1+1, p2, p3+1, visited);
+            } else if (s3[p3]==s2[p2]) { //只有s2[p2]匹配s3[p3]，单枝DFS
+                dfs(s1, s2, s3, p1, p2+1, p3+1, visited);
+            } else { //都不匹配，剪枝
+                return;
+            }
+        } else if (p1<s1.length) { //p2到达终点
+            if (s3[p3]==s1[p1]) { //s1[p1]匹配s3[p3]，单枝DFS
+                dfs(s1, s2, s3, p1+1, p2, p3+1, visited);
+            } else {
+                return; //s1[p1]不匹配，剪枝
+            }
+        } else if (p2<s2.length) { //p1到达终点
+            if (s3[p3]==s2[p2]) { //s2[p2]匹配s3[p3]，单枝DFS
+                dfs(s1, s2, s3, p1, p2+1, p3+1, visited);
+            } else {
+                return; //s2[p2]不匹配，剪枝
+            }
+        }
+        visited[p1][p2] = true; //标记p1,p2所在当前位置已经被访问，这个标记放前面后面都可以
+    }
+    fun isInterleave(s1: String, s2: String, s3: String): Boolean {
+        val n1 = s1.length; 
+        val n2 = s2.length; 
+        val n3 = s3.length;
+        if (n1 + n2 != n3) return false;
+        val visited = Array(n1 + 1) { BooleanArray(n2 + 1) };
+        dfs(s1, s2, s3, 0, 0, 0, visited)
+        return visited[n1][n2]; //检测终点是否被访问，即终点是否能够到达
+    }
+}
+```
+
+改成 $p_1$ 或 $p_2$ 没有到达终点，可以去除很多重复判断，大大精简代码，注意数组越界问题：
+
+* []
+
+```C++
+class Solution {
+public:
+    vector<vector<int>>visited;
+    void dfs(string& s1, string& s2, string& s3, int p1, int p2, int p3) {
+        if (visited[p1][p2]) return; //已经访问过，直接返回，防止重复遍历
+        if (p1<s1.length() || p2<s2.length()) { //p1或p2没有到达终点
+            //s1[p1]匹配s3[p3]，DFS
+            if (p1<s1.length() && s3[p3]==s1[p1]) { 
+                dfs(s1, s2, s3, p1+1, p2, p3+1);
+            } 
+            //s2[p2]匹配s3[p3]，DFS
+            if (p2<s2.length() && s3[p3]==s2[p2]) { 
+                dfs(s1, s2, s3, p1, p2+1, p3+1);
+            } else { //都不匹配或越界，剪枝
+                return;
+            }
+        } 
+        visited[p1][p2] = 1; //标记p1,p2所在当前位置已经被访问，这个标记放前面后面都可以
+    }
+    bool isInterleave(string s1, string s2, string s3) {
+        int n1 = (int)s1.size(), n2 = (int)s2.size(), n3 = (int)s3.size();
+        if (n1+n2!=n3) return false;
+        visited.resize(n1+1,vector<int>(n2+1));
+        dfs(s1, s2, s3, 0, 0, 0);
+        return visited[n1][n2];//检测终点是否被访问，即终点是否能够到达
+    }
+};
+```
+
+* []
+
+```Java
+class Solution {
+    boolean[][] visited;
+    public void dfs(String s1, String s2, String s3, int p1, int p2, int p3) {
+        if (visited[p1][p2]) return; //已经访问过，直接返回，防止重复遍历
+        if (p1<s1.length()||p2<s2.length()) { //p1或p2没有到达终点
+            //s1[p1]匹配s3[p3]，DFS
+            if (p1<s1.length() && s3.charAt(p3)==s1.charAt(p1)) { 
+                dfs(s1, s2, s3, p1+1, p2, p3+1);
+            } 
+            //s2[p2]匹配s3[p3]，DFS
+            if (p2<s2.length() && s3.charAt(p3)==s2.charAt(p2)) { 
+                dfs(s1, s2, s3, p1, p2+1, p3+1);
+            } else { //都不匹配越界，剪枝
+                return;
+            }
+        }
+        visited[p1][p2] = true; //标记p1,p2所在当前位置已经被访问，这个标记放前面后面都可以
+    }
+    public boolean isInterleave(String s1, String s2, String s3) {
+        int n1 = s1.length(), n2 = s2.length(), n3 = s3.length();
+        if (n1+n2!=n3) return false;
+        visited = new boolean[n1 + 1][n2 + 1];
+        dfs(s1, s2, s3, 0, 0, 0);
+        return visited[n1][n2];//检测终点是否被访问，即终点是否能够到达
+    }
+}
+```
+
+* []
+
+```Swift
+class Solution {
+    func dfs(_ s1: Array<Character>, _ s2: Array<Character>, _ s3: Array<Character>, _ p1: Int, _ p2: Int, _ p3: Int, _ visited: inout [[Bool]]) {
+        if visited[p1][p2]==true {
+            return  //已经访问过，直接返回，防止重复遍历
+        }
+        if p1<s1.count || p2<s2.count { //p1或p2没有到达终点
+            //s1[p1]匹配s3[p3]，DFS
+            if p1<s1.count && s3[p3]==s1[p1] { 
+                dfs(s1, s2, s3, p1+1, p2, p3+1, &visited)
+            } 
+            //s2[p2]匹配s3[p3]，DFS
+            if p2<s2.count && s3[p3]==s2[p2] { 
+                dfs(s1, s2, s3, p1, p2+1, p3+1, &visited)
+            } else { //都不匹配或者越界，剪枝
+                return
+            }
+        }
+        visited[p1][p2] = true //标记p1,p2所在当前位置已经被访问，这个标记放前面后面都可以
+    }
+    func isInterleave(_ s1: String, _ s2: String, _ s3: String) -> Bool {
+        let s1 = Array(s1), s2 = Array(s2), s3 = Array(s3), n1 = s1.count, n2 = s2.count, n3=s3.count
+        guard n1 + n2 == n3 else {
+            return false
+        }
+        var visited = [[Bool]](repeating: [Bool](repeating: false, count: n2 + 1), count: n1 + 1)
+        dfs(s1, s2, s3, 0, 0, 0, &visited)
+        return visited[n1][n2] //检测终点是否被访问，即终点是否能够到达
+    }
+}
+```
+
+* []
+
+```Kotlin
+class Solution {
+    fun dfs(s1: String, s2: String, s3: String, p1: Int, p2: Int, p3: Int, visited: Array<BooleanArray>):Unit{
+        if (visited[p1][p2]) return; //已经访问过，直接返回，防止重复遍历
+        if (p1<s1.length || p2<s2.length) { //p1或p2没有到达终点
+            //s1[p1]匹配s3[p3]，DFS
+            if (p1<s1.length && s3[p3]==s1[p1]) { 
+                dfs(s1, s2, s3, p1+1, p2, p3+1, visited);
+            } 
+            //s2[p2]匹配s3[p3]，DFS
+            if (p2<s2.length && s3[p3]==s2[p2]) { 
+                dfs(s1, s2, s3, p1, p2+1, p3+1, visited);
+            } else { 
+                return;  //都不匹配或者越界，剪枝
+            }
+        } 
+        visited[p1][p2] = true; //标记p1,p2所在当前位置已经被访问，这个标记放前面后面都可以
+    }
+    fun isInterleave(s1: String, s2: String, s3: String): Boolean {
+        val n1 = s1.length; 
+        val n2 = s2.length; 
+        val n3 = s3.length;
+        if (n1 + n2 != n3) return false;
+        val visited = Array(n1 + 1) { BooleanArray(n2 + 1) };
+        dfs(s1, s2, s3, 0, 0, 0, visited)
+        return visited[n1][n2]; //检测终点是否被访问，即终点是否能够到达
+    }
+}
+```
+
+### 方法二：广度优先搜索（剪枝） 【通过】
+
+改为广度优先搜索也可以：
+
+* []
+
+```C++
+class Solution {
+public:
+    bool isInterleave(string s1, string s2, string s3) {
+        int n1 = (int)s1.size(), n2 = (int)s2.size(), n3 = (int)s3.size();
+        if (n1+n2!=n3) return false;
+        vector<vector<int>>visited(n1+1,vector<int>(n2+1));
+        queue<pair<int, int>>Q; //pair 存{p1, p2} p3=p1+p2
+        Q.push({0,0}); 
+        visited[0][0]=1;
+        while (!Q.empty()) {
+            auto [p1,p2] = Q.front();
+            Q.pop();
+            if (p1<n1 || p2<n2) {
+                if (p1<n1 && s1[p1] == s3[p1+p2] && visited[p1+1][p2] == 0) {
+                    Q.push({p1+1,p2});
+                    visited[p1+1][p2] = 1;
+                }
+                if (p2<n2 && s2[p2] == s3[p1+p2] && visited[p1][p2+1] == 0) {
+                    Q.push({p1,p2+1});
+                    visited[p1][p2+1] = 1;
+                }
+            }
+        }
+        return visited[n1][n2];//检测终点是否被访问，即终点是否能够到达
+    }
+};
+```
+
+* []
+
+```Java
+class Solution {
+    public boolean isInterleave(String s1, String s2, String s3) {
+        int n1 = s1.length(), n2 = s2.length(), n3 = s3.length();
+        if (n1+n2!=n3) return false;
+        boolean [][] visited = new boolean[n1 + 1][n2 + 1];
+        Queue<int[]>Q = new LinkedList<>();; // 存{p1, p2} p3=p1+p2
+        Q.add(new int[]{0,0});
+        visited[0][0]=true;
+        while (!Q.isEmpty()) {
+            int []cur = Q.poll();
+            int p1 = cur[0], p2 = cur[1];
+            if (p1<n1 || p2<n2) {
+                if (p1<n1 && s1.charAt(p1) == s3.charAt(p1+p2) && !visited[p1+1][p2]) {
+                    Q.add(new int[]{p1+1,p2});
+                    visited[p1+1][p2] = true;
+                }
+                if (p2<n2 && s2.charAt(p2) == s3.charAt(p1+p2) && !visited[p1][p2+1]) {
+                    Q.add(new int[]{p1,p2+1});
+                    visited[p1][p2+1] = true;
+                }
+            }
+        }
+        return visited[n1][n2];
+    }
+}
+```
+
+### 方法三：记忆化搜索（自顶向下动态规划） 【通过】
+
+参考[@zumin](/u/zumin/)的C++代码，改写并扩充了其它语言
+[DFS+记忆，简单易懂，用时0ms](https://leetcode-cn.com/problems/interleaving-string/solution/dfsji-yi-jian-dan-yi-dong-yong-shi-0ms-by-zumin/)
+这版代码比方法一稍复杂，先构建记忆缓存矩阵，有匹配，不匹配，未搜索三个状态，也就是这版代码不匹配也是记录的，没有进行不匹配剪枝，只有记忆化剪枝。
+备注：本人构建记忆化矩阵枚举值如下：匹配 1，不匹配 0， 未搜索-1，好处是0和1正好对应${\rm bool}$ 类型的$true$和$false$。
+C++开始赋值-1（或者自定义其它初始化值），搜索成功赋值1，搜索失败赋值0，这样才能匹配本题的 ${\rm bool}$ 返回值类型，C++会自动进行隐式类型转换，将 ${\rm int}$ 转为 ${\rm bool}$ ；Java采用 ${\rm Boolean}$ 封装类，没有赋值的情况下为null，不会和true、false冲突；Swift不支持隐式类型转换，结果用ans记录 ${\rm Int}$ 值，再做判断。
+memo数组也可以记为cache数组，不同程序员命名习惯不同。
+
+* []
+
+```C++
+class Solution {
+public:
+    vector<vector<int>>memo;
+    bool dfs(string &s1, string &s2, string &s3, int p1, int p2, int p3) {
+        //搜索完s3，即代表s1和s2能交错组成s3
+        if (p3 == s3.length()) return true; //搜索完s3，即代表s1和s2能交错组成s3
+        //若已经搜索过，则直接返回记忆结果
+        if (memo[p1][p2] != -1) return memo[p1][p2];
+        //尝试用s1[p1]匹配s3[p3]
+        if (p1 != s1.length() && s1[p1] == s3[p3] && dfs(s1, s2, s3, p1+1, p2, p3+1)) {
+            return memo[p1+1][p2] = 1;
+        }
+        //尝试用s2[p2]匹配s3[p3]
+        if (p2 != s2.length() && s2[p2] == s3[p3] && dfs(s1, s2, s3, p1, p2+1, p3+1)) {
+            return memo[p1][p2+1] = 1;
+        }
+        //若都不能匹配s3[p3]，则返回flase
+        return memo[p1][p2] = 0;
+    }
+    bool isInterleave(string s1, string s2, string s3) {
+        int n1 = (int)s1.size(), n2 = (int)s2.size(), n3 = (int)s3.size();
+        if (n1+n2!=n3) return false;
+        memo.resize(n1+1,vector<int>(n2+1, -1));
+        return dfs(s1, s2, s3, 0, 0, 0);
+    }
+};
+```
+
+* []
+
+```Java
+class Solution {
+    Boolean[][] memo;
+    public boolean dfs(String s1, String s2, String s3, int p1, int p2, int p3) {
+        //搜索完s3，即代表s1和s2能交错组成s3
+        if (p3 == s3.length()) return true; //搜索完s3，即代表s1和s2能交错组成s3
+        //若已经搜索过，则直接返回记忆结果
+        if (memo[p1][p2] != null) return memo[p1][p2];
+        //尝试用s1[p1]代替s3[p3]
+        if (p1 != s1.length() && s1.charAt(p1) == s3.charAt(p3) && dfs(s1, s2, s3, p1+1, p2, p3+1)) {
+            return memo[p1+1][p2] = true;
+        }
+        //尝试用s2[p2]代替s3[p3]
+        if (p2 != s2.length() && s2.charAt(p2) == s3.charAt(p3) && dfs(s1, s2, s3, p1, p2+1, p3+1)) {
+            return memo[p1][p2+1] = true;
+        }
+        //若都不能代替s3[p3]，则返回flase
+        return memo[p1][p2] = false;
+    }
+    public boolean isInterleave(String s1, String s2, String s3) {
+        int n1 = s1.length(), n2 = s2.length(), n3 = s3.length();
+        if (n1+n2!=n3) return false;
+        memo = new Boolean[n1 + 1][n2 + 1];
+        return dfs(s1, s2, s3, 0, 0, 0);
+    }
+}
+```
+
+* []
+
+```Swift
+class Solution {
+    func dfs(_ s1: Array<Character>, _ s2: Array<Character>, _ s3: Array<Character>, _ p1: Int, _ p2: Int, _ p3: Int, _ memo: inout [[Int]]) -> Int {
+        //搜索完s3，即代表s1和s2能交错组成s3
+        if p3 == s3.count {
+            return 1 //搜索完s3，即代表s1和s2能交错组成s3
+        }
+        //若已经搜索过，则直接返回记忆结果
+        if memo[p1][p2] != -1 {
+            return memo[p1][p2]
+        }
+        //尝试用s1[p1]匹配s3[p3]
+        if p1 != s1.count && s1[p1] == s3[p3] && dfs(s1, s2, s3, p1+1, p2, p3+1, &memo)==1 {
+            memo[p1+1][p2] = 1
+            return 1
+        }
+        //尝试用s2[p2]匹配s3[p3]
+        if p2 != s2.count && s2[p2] == s3[p3] && dfs(s1, s2, s3, p1, p2+1, p3+1, &memo)==1 {
+            memo[p1][p2+1] = 1
+            return 1
+        }
+        //若都不能匹配s3[p3]，则返回flase
+        memo[p1][p2] = 0
+        return 0;
+    }
+    func isInterleave(_ s1: String, _ s2: String, _ s3: String) -> Bool {
+        let s1 = Array(s1), s2 = Array(s2), s3 = Array(s3), n1 = s1.count, n2 = s2.count, n3 = s3.count
+        guard n1 + n2 == n3 else {
+            return false
+        }
+        var memo = [[Int]](repeating: [Int](repeating: -1, count: n2 + 1), count: n1 + 1)
+        let ans = dfs(s1, s2, s3, 0, 0, 0, &memo)
+        if ans==1 {
+            return true
+        } else {
+            return false
+        }
+    }
+}
+```
+
+用 C++11标准 的 $function$ 改写一下，自顶向下动态规划一目了然：
+
+* []
+
+```C++
+class Solution {
+public:
+    bool isInterleave(string s1, string s2, string s3) {
+        int n1 = (int)s1.size(), n2 = (int)s2.size(), n3 = (int)s3.size();
+        if (n1+n2!=n3) return false;
+        vector<vector<int>>cache(n1+1,vector<int>(n2+1, -1));
+        function<bool(int, int, int)>dp = [&](int p1, int p2, int p3) {
+            //搜索完s3，即代表s1和s2能交错组成s3
+            if (p3 == s3.length()) return true; //搜索完s3，即代表s1和s2能交错组成s3
+            //若已经搜索过，则直接返回记忆结果
+            if (cache[p1][p2] != -1) return cache[p1][p2] != 0;
+            //尝试用s1[p1]代替s3[p3]
+            if (p1 != s1.length() && s1[p1] == s3[p3] && dp(p1+1, p2, p3+1)) {
+                cache[p1+1][p2] = 1;
+                return true;
+            }
+            //尝试用s2[p2]代替s3[p3]
+            if (p2 != s2.length() && s2[p2] == s3[p3] && dp(p1, p2+1, p3+1)) {
+                cache[p1][p2+1] = 1;
+                return true;
+            }
+            //若都不能代替s3[p3]，则返回flase
+            cache[p1][p2] = 0;
+            return false;
+        };
+        return dp(0, 0, 0);
+    }
+};
+```
+
+### 方法四：动态规划（自底向上动态规划） 【通过】
+
+代码见官方题解：[交错字符串](https://leetcode-cn.com/problems/interleaving-string/solution/jiao-cuo-zi-fu-chuan-by-leetcode-solution/)
+
+#### 复杂度分析
+
+- 时间复杂度：$O(m*n)$，$m$ 为 $s_1$ 的长度，$n$ 为 $s_2$ 的长度。
+- 空间复杂度：$O(m*n)$
+
+#### 运行结果
+
+C++、Java、Swift运行效率几乎百分百！
+![Screen Shot 2021-08-03 at 2.23.03 AM.png](https://pic.leetcode-cn.com/1627935137-cPHcMO-Screen%20Shot%202021-08-03%20at%202.23.03%20AM.png)
+![Screen Shot 2021-08-03 at 5.15.17 AM.png](https://pic.leetcode-cn.com/1627939010-GNQJul-Screen%20Shot%202021-08-03%20at%205.15.17%20AM.png)
+![Screen Shot 2021-08-03 at 12.26.49 PM.png](https://pic.leetcode-cn.com/1627964902-OuLiKS-Screen%20Shot%202021-08-03%20at%2012.26.49%20PM.png)
+![Screen Shot 2021-08-03 at 1.13.03 PM.png](https://pic.leetcode-cn.com/1627967767-ryKgAz-Screen%20Shot%202021-08-03%20at%201.13.03%20PM.png)
+
+## 总结
+
+这道题记忆化搜索是在一个二叉树中寻找正确搜索路径，动态规划是在一个构建好的二维数组中寻找正确搜索路径。
+**我们可以进一步拓展，比较这两种思路的优劣：**
+如果改成 $s$ 由 $s_1$, $s_2$, $s_3$ 交错组成。
+深度优先搜索的搜索树应该是一颗三叉树，记忆化矩阵是一个三维矩阵，动态规划的dp数组应该是一个三维矩阵;
+继续拓展呢，$s$ 由 $s_1$, $s_2$ ... $s_n$ 交错组成。
+深度优先搜索的搜索树应该是一颗n叉树，记忆化矩阵是一个n维矩阵，动态规划的dp数组应该是一个n维矩阵;
+如何优化？
+深度优先搜索中记忆化矩阵可以hash化，动态规划可以用滚动数组降维。
+这样就变成了 ($n$叉树$+$哈希表) $VS$ (${\rm n-1}$ 维矩阵)。
+两种方法孰优孰劣？
+但本题最优解肯定是动态规划滚动数组优化成一维dp版了。
+这是本人无聊的一点思考，也许有问题，欢迎同学们进一步讨论。
+
+动态规划是一类算法，目前有两种主流实现方法：
+1. 记忆化搜索，记忆化搜索是一种自顶向下（${\rm Top-down}$）思维，正向推导，借助 递归
+2. 递推表达式，递推表达式是一种自底向上（${\rm Bottom-up}$）思维，逆向推导，借助 for 循环
+
+两种方法可以相互转化，互有优劣。
+
+1. 记忆化搜索
+
+- 优点：不需要考虑求解顺序；
+- 缺点：递归求解可能出现栈溢出；
+
+2. 递推表达式
+
+- 优点：不会出现栈溢出，代码量小，不用编写新函数，能够使用滚动数组优化；
+- 缺点：需要考虑求解顺序，错误的求解顺序会导致错误的答案；
+
+###### 更于2021-09-02
+
+21号最近考研刚出分，我有希望进入复试，祈祷自己能上岸吧。
+这个帖子之前写的，有不少对动态规划理解错误的地方，现在已经修正，以后会深入补充。
+对大家说抱歉了，根本原因是自己菜，也请大家理解我，那时候刚学习算法一个多月，现在我也在一步步变强。
+有空我开专题深入讨论自顶向下（${\rm Top-down}$）动态规划和自底向上（${\rm Bottom-up}$）动态规划的优劣，现在同学们先认真体会下这道经典的动态规划入门题。
+
+###### 更于2022-02-24
+
+如果有想法或者错误本人会不定期更新维护。本菜鸡零基础非科班还在努力学习中，希望大佬们多多批评指正。
+
+感谢阅读！
+
+**原创不易，欢迎收藏点赞评论。**

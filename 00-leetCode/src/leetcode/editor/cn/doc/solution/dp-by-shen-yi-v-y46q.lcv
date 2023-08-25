@@ -1,0 +1,85 @@
+### 解题思路
+
+先写出复杂度较高的版本，然后优化。看到这个对复杂度的要求，基本上排除递归了。
+
+总体思路就是记录 s1 与 s2 取到下标位之前，能否与 s3 的 s1 + s2 下标之前对应。
+
+### 代码
+
+* java
+
+```java
+class Solution {
+    public boolean isInterleave(String s1, String s2, String s3) {
+
+        int len1 = s1.length();
+        int len2 = s2.length();
+        int len3 = s3.length();
+
+        if (len1 + len2 != len3) {
+            return false;
+        }
+
+        boolean[][] res = new boolean[len1 + 1][len2 + 1];//s1和s2分别取到哪个下标之前
+        res[0][0] = true;
+
+        for (int i = 1; i <= len1; i++) {//只用s1与s3比较
+          	res[i][0] = res[i - 1][0] && s1.charAt(i - 1) == s3.charAt(i - 1);
+        }
+
+        for (int i = 1; i <= len2; i++) {//只用s2与s3比较
+          	res[0][i] = res[0][i - 1] && s2.charAt(i - 1) == s3.charAt(i - 1);
+        }
+
+        for (int i = 1; i <= len1; i++) {
+            for (int j = 1; j <= len2; j++) {
+                if (s1.charAt(i - 1) == s3.charAt(i + j - 1)) {
+                    res[i][j] |= res[i - 1][j];
+                }
+                if (s2.charAt(j - 1) == s3.charAt(i + j - 1)) {
+                    res[i][j] |= res[i][j - 1];
+                }
+            }
+        }
+
+        return res[len1][len2];
+    }
+}
+```
+
+优化空间复杂度后的代码
+
+* java
+
+```java
+class Solution {
+    public boolean isInterleave(String s1, String s2, String s3) {
+
+        int len1 = s1.length();
+        int len2 = s2.length();
+        int len3 = s3.length();
+
+        if (len1 + len2 != len3) {
+            return false;
+        }
+
+        boolean[] res = new boolean[len2 + 1];
+        res[0] = true;
+
+        for (int i = 1; i <= len2; i++) {
+            res[i] = res[i - 1] && s2.charAt(i - 1) == s3.charAt(i - 1);
+        }
+
+        for (int i = 1; i <= len1; i++) {
+            res[0] = res[0] && s1.charAt(i - 1) == s3.charAt(i - 1);
+            for (int j = 1; j <= len2; j++) {
+                res[j] = res[j] && s1.charAt(i - 1) == s3.charAt(i + j - 1);
+                res[j] |= res[j - 1] && s2.charAt(j - 1) == s3.charAt(i + j - 1);
+            }
+        }
+
+        return res[len2];
+    }
+}
+```
+

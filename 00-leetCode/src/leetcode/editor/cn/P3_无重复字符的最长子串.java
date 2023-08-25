@@ -5,7 +5,7 @@ package leetcode.editor.cn;
  * @author qr
  * @date 2023-08-06 10:30:19
  */
-public class P3_LongestSubstringWithoutRepeatingCharacters{
+class P3_LongestSubstringWithoutRepeatingCharacters{
 	 public static void main(String[] args) {
 	 	 //测试代码
 	 	 Solution solution = new P3_LongestSubstringWithoutRepeatingCharacters().new Solution();

@@ -1,0 +1,27 @@
+### 解题思路
+
+此处撰写解题思路
+
+### 代码
+
+* java
+
+```java
+class Solution {
+    String s1,s2,s3;
+    public boolean isInterleave(String s1, String s2, String s3) {
+        this.s1=s1;this.s2=s2;this.s3=s3;
+        int s1length=s1.length(),s2length=s2.length(),s3length=s3.length();
+        if(s1length+s2length!=s3length) return false;
+        return isInterleaveByLength(s3length,s1length,s2length);
+       
+    }
+    public boolean isInterleaveByLength(int s3length,int s1length,int s2length){
+        if(s3length==0) return true;
+        if(s1length==0) return s2.charAt(s2length-1)==s3.charAt(s3length-1)&&isInterleaveByLength(s3length-1,0,s2length-1);
+        if(s2length==0) return s1.charAt(s1length-1)==s3.charAt(s3length-1)&&isInterleaveByLength(s3length-1,s1length-1,0);
+        return (s1.charAt(s1length-1)==s3.charAt(s3length-1)&&isInterleaveByLength(s3length-1,s1length-1,s2length))||(s2.charAt(s2length-1)==s3.charAt(s3length-1)&&isInterleaveByLength(s3length-1,s1length,s2length-1));
+    }
+}
+```
+
