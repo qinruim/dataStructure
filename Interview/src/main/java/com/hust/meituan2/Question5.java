@@ -16,26 +16,33 @@ public class Question5 {
         int n = scanner.nextInt();
         int k = scanner.nextInt();
         int[] nums = new int[n];
-//        int sum = 0;
+        int sum = 0;
 
         for (int i = 0; i < n; i++) {
             nums[i] = scanner.nextInt();
-//            sum += nums[i];
+            sum += nums[i];
         }
 
+//        int left = 0,right = 0;
+//        while (right <= n){
+//
+//
+//
+//        }
 
-        int res = -1;
-        for (int i = 0; i < n; i++) {
-            int sum = 0;
-            for (int j = i; j < n; j++) {
-                sum += nums[j];
-                if (sum == k *(j - i + 1)){
-                    res = Math.max(res,j - i + 1);
-                }
 
-            }
-        }
-        System.out.println(res);
+//        int res = -1;
+//        for (int i = 0; i < n; i++) {
+//            int sum = 0;
+//            for (int j = i; j < n; j++) {
+//                sum += nums[j];
+//                if (sum == k *(j - i + 1)){
+//                    res = Math.max(res,j - i + 1);
+//                }
+//
+//            }
+//        }
+//        System.out.println(res);
 
 
 //        int left = 0;
