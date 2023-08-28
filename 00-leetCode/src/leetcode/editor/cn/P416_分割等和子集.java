@@ -46,6 +46,72 @@ class Solution {
 		}
 		//偶数才可以
 		int target = sum / 2;
+
+		//一维
+//		return dp1(nums,target);
+
+		//二维
+		return dp2(nums,target);
+
+	}
+
+	/**
+	 * 二维
+	 * @param nums
+	 * @param target
+	 * @return
+	 */
+	private boolean dp2(int[] nums, int target) {
+		int n = nums.length;
+		//dp[i][j]:i个物品，容量为j ，能装的最大价值
+		//要求正好装满  那么最大价值正好等于target  说明可以  否则 价值一定小于target
+		//因此 最后 return dp[n][target] == target
+		int[][] dp = new int[n + 1][target + 1];
+
+		//base case dp[0][j] 和 dp[i][0]  都为0
+
+
+
+		for (int i = 1; i <= n; i++) {
+			for (int j = 1; j <= target; j++) {
+				if (j < nums[i - 1]){
+					dp[i][j] = dp[i - 1][j];
+				}else {
+					dp[i][j] = Math.max(dp[i - 1][j],dp[i - 1][j - nums[i - 1]] + nums[i - 1]);
+				}
+
+
+				if (dp[i][j] == target){
+					return true;
+				}
+			}
+
+		}
+
+//		for (int i = 1; i <= n; i++) {
+//			for (int j = nums[i - 1]; j <= target; j++) {
+//
+//				dp[i][j] = Math.max(dp[i - 1][j],dp[i - 1][j - nums[i - 1]] + nums[i - 1]);
+//
+//
+//				if (dp[i][j] == target){
+//					return true;
+//				}
+//			}
+//
+//		}
+
+		return dp[n][target] == target;
+
+	}
+
+	/**
+	 * 一维
+	 * @param nums
+	 * @param target
+	 * @return
+	 */
+	private boolean dp1(int[] nums, int target) {
 		//因为 dp[target] 不可能比target大，大的话说明有物品的价值大于容量  但是这个题中物品的价值始终等于容量
 		//也就是说 dp[i]顶多等于i  或者没装满 就小于i
 		//dp[j]:容量为j的背包能装的最大价值（nums数组，既是物品重量，又是物品价值）
@@ -71,8 +137,6 @@ class Solution {
 		//也就是说 dp[i]顶多等于i  或者没装满 就小于i
 		return dp[target] == target;
 	}
-
-
 
 
 	LinkedList<Integer> path = new LinkedList<>();
