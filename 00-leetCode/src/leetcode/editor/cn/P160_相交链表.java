@@ -41,9 +41,51 @@ public class Solution {
 //		return method1(headA,headB);
 
 		//方法2：双指针
-		return method2(headA,headB);
+//		return method2(headA,headB);
+
+		//方法3:双指针 思路类似方法2
+		return method3(headA,headB);
+
+
 
     }
+
+	private ListNode method3(ListNode headA, ListNode headB) {
+		//既然问题在两个链表相交前长度不等  那记录一下两个链表的长度 长的那个先走几步 即可
+		int lenA = 0,lenB = 0;
+		ListNode pa = headA;
+		ListNode pb = headB;
+
+		while (pa != null){
+			pa = pa.next;
+			lenA++;
+		}
+		while (pb != null){
+			pb = pb.next;
+			lenB++;
+		}
+
+		pa = headA;
+		pb = headB;
+
+		if (lenA > lenB){
+			for (int i = 0; i < lenA - lenB; i++) {
+				pa = pa.next;
+			}
+		}
+		if (lenA < lenB){
+			for (int i = 0; i < lenB - lenA; i++) {
+				pb = pb.next;
+			}
+		}
+
+		//齐头并进
+		while (pa != pb){
+			pa = pa.next;
+			pb = pb.next;
+		}
+		return pa;
+	}
 
 	private ListNode method2(ListNode headA, ListNode headB) {
 		//双指针就是想办法让两个指针在相交处相遇 这要求相交前两个链表的长度一样
