@@ -36,6 +36,7 @@ class Solution {
 //		dummy.next = head;
 
 		//如果偶数个节点  要返回前一个中间结点 初始指向dummy
+		//				   后一个         则     head
 		ListNode fast = head;
 		ListNode slow = head;
 

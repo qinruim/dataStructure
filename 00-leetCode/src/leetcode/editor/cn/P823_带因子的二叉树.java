@@ -108,11 +108,11 @@ class Solution {
 	 */
 	private long dfs(int[] arr, Map<Integer,Integer> arrMap, int i) {
 		//终止条件：等于2或者是质数无法再分解  或者是最小的数
-//		if (arr[i] == 2 || isPrimeNum(arr[i]) || i == 0){
-//			return 1;
-//		}
+		if (arr[i] == 2 || isPrimeNum(arr[i]) || i == 0){
+			return 1;
+		}
 
-		// 递归边界：如果无法分解出两个在arr 中的因子，就无法继续递归了，此时只有1个方案 不必显示写出
+		// 递归边界：如果无法分解出两个在arr 中的因子，就无法继续递归了，此时只有1个方案 上面终止条件不必显示写出
 		long res = 1; //到此为止不再分解也是1种 要加上
 		//遍历比arr[i]小的数 找因子
 		for (int j = 0; j < i; j++) {
@@ -127,6 +127,7 @@ class Solution {
 //				res +=  dfs(arr,arrMap,j) * dfs(arr,arrMap,arrMap.get(arr[i]/arr[j]));
 				res += memo.get(j) * memo.get(arrMap.get(arr[i]/arr[j]));
 			}
+			//不能要这个else 因为这是在遍历因子 后面可能有满足条件的因子
 //			else {
 //				return 1;
 //			}
@@ -135,16 +136,16 @@ class Solution {
 		return res;
 	}
 
-//	private boolean isPrimeNum(int i) {
-//		boolean res = true;
-//		for (int j = 2; j < i; j++) {
-//			if (i % j == 0){
-//				res = false;
-//			}
-//		}
-//
-//		return res;
-//	}
+	private boolean isPrimeNum(int i) {
+		boolean res = true;
+		for (int j = 2; j < i; j++) {
+			if (i % j == 0){
+				res = false;
+			}
+		}
+
+		return res;
+	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
