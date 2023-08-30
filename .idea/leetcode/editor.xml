@@ -3,6 +3,17 @@
   <component name="LeetcodeEditor">
     <option name="projectConfig">
       <map>
+        <entry key="/tmp/leetcode/editor/cn/[206]反转链表.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/leetCode/src/leetcode/editor/cn/doc/content/P206_ReverseLinkedList.md" />
+              <option name="frontendQuestionId" value="leetcode.cn206" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/leetCode/src/leetcode/editor/cn/P206_ReverseLinkedList.java" />
+              <option name="titleSlug" value="reverse-linked-list" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$USER_HOME$/AppData/Local/Temp/leetcode/editor/cn/[876]链表的中间结点.java">
           <value>
             <LeetcodeEditor>
@@ -44,17 +55,6 @@
               <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P102_BinaryTreeLevelOrderTraversal.java" />
               <option name="titleSlug" value="binary-tree-level-order-traversal" />
-            </LeetcodeEditor>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P1043_分隔数组以得到最大和.java">
-          <value>
-            <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P1043_分隔数组以得到最大和.md" />
-              <option name="frontendQuestionId" value="leetcode.cn1043" />
-              <option name="host" value="leetcode.cn" />
-              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P1043_分隔数组以得到最大和.java" />
-              <option name="titleSlug" value="partition-array-for-maximum-sum" />
             </LeetcodeEditor>
           </value>
         </entry>
@@ -198,17 +198,6 @@
               <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P115_不同的子序列.java" />
               <option name="titleSlug" value="distinct-subsequences" />
-            </LeetcodeEditor>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P11_盛最多水的容器.java">
-          <value>
-            <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P11_盛最多水的容器.md" />
-              <option name="frontendQuestionId" value="leetcode.cn11" />
-              <option name="host" value="leetcode.cn" />
-              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P11_盛最多水的容器.java" />
-              <option name="titleSlug" value="container-with-most-water" />
             </LeetcodeEditor>
           </value>
         </entry>
@@ -421,14 +410,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P167_两数之和II输入有序数组.java">
+        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P1654_到家的最少跳跃次数.java">
           <value>
             <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P167_两数之和II输入有序数组.md" />
-              <option name="frontendQuestionId" value="leetcode.cn167" />
+              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P1654_到家的最少跳跃次数.md" />
+              <option name="frontendQuestionId" value="leetcode.cn1654" />
               <option name="host" value="leetcode.cn" />
-              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P167_两数之和II输入有序数组.java" />
-              <option name="titleSlug" value="two-sum-ii-input-array-is-sorted" />
+              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P1654_到家的最少跳跃次数.java" />
+              <option name="titleSlug" value="minimum-jumps-to-reach-home" />
             </LeetcodeEditor>
           </value>
         </entry>
@@ -718,17 +707,6 @@
             </LeetcodeEditor>
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P26_删除有序数组中的重复项.java">
-          <value>
-            <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P26_删除有序数组中的重复项.md" />
-              <option name="frontendQuestionId" value="leetcode.cn26" />
-              <option name="host" value="leetcode.cn" />
-              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P26_删除有序数组中的重复项.java" />
-              <option name="titleSlug" value="remove-duplicates-from-sorted-array" />
-            </LeetcodeEditor>
-          </value>
-        </entry>
         <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P279_完全平方数.java">
           <value>
             <LeetcodeEditor>
@@ -743,33 +721,11 @@
         <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P27_RemoveElement.java">
           <value>
             <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P27_移除元素.md" />
+              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P27_RemoveElement.md" />
               <option name="frontendQuestionId" value="leetcode.cn27" />
               <option name="host" value="leetcode.cn" />
-              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P27_移除元素.java" />
+              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P27_RemoveElement.java" />
               <option name="titleSlug" value="remove-element" />
-            </LeetcodeEditor>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P27_移除元素.java">
-          <value>
-            <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P27_移除元素.md" />
-              <option name="frontendQuestionId" value="leetcode.cn27" />
-              <option name="host" value="leetcode.cn" />
-              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P27_移除元素.java" />
-              <option name="titleSlug" value="remove-element" />
-            </LeetcodeEditor>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P283_移动零.java">
-          <value>
-            <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P283_移动零.md" />
-              <option name="frontendQuestionId" value="leetcode.cn283" />
-              <option name="host" value="leetcode.cn" />
-              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P283_移动零.java" />
-              <option name="titleSlug" value="move-zeroes" />
             </LeetcodeEditor>
           </value>
         </entry>
@@ -864,21 +820,10 @@
         <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P344_ReverseString.java">
           <value>
             <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P344_反转字符串.md" />
+              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P344_ReverseString.md" />
               <option name="frontendQuestionId" value="leetcode.cn344" />
               <option name="host" value="leetcode.cn" />
-              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P344_反转字符串.java" />
-              <option name="titleSlug" value="reverse-string" />
-            </LeetcodeEditor>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P344_反转字符串.java">
-          <value>
-            <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P344_反转字符串.md" />
-              <option name="frontendQuestionId" value="leetcode.cn344" />
-              <option name="host" value="leetcode.cn" />
-              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P344_反转字符串.java" />
+              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P344_ReverseString.java" />
               <option name="titleSlug" value="reverse-string" />
             </LeetcodeEditor>
           </value>
@@ -1023,17 +968,6 @@
               <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P424_LongestRepeatingCharacterReplacement.java" />
               <option name="titleSlug" value="longest-repeating-character-replacement" />
-            </LeetcodeEditor>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P42_接雨水.java">
-          <value>
-            <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P42_接雨水.md" />
-              <option name="frontendQuestionId" value="leetcode.cn42" />
-              <option name="host" value="leetcode.cn" />
-              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P42_接雨水.java" />
-              <option name="titleSlug" value="trapping-rain-water" />
             </LeetcodeEditor>
           </value>
         </entry>
@@ -1279,17 +1213,6 @@
             </LeetcodeEditor>
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P5_最长回文子串.java">
-          <value>
-            <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P5_最长回文子串.md" />
-              <option name="frontendQuestionId" value="leetcode.cn5" />
-              <option name="host" value="leetcode.cn" />
-              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P5_最长回文子串.java" />
-              <option name="titleSlug" value="longest-palindromic-substring" />
-            </LeetcodeEditor>
-          </value>
-        </entry>
         <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P617_合并二叉树.java">
           <value>
             <LeetcodeEditor>
@@ -1510,17 +1433,6 @@
             </LeetcodeEditor>
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P83_删除排序链表中的重复元素.java">
-          <value>
-            <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P83_删除排序链表中的重复元素.md" />
-              <option name="frontendQuestionId" value="leetcode.cn83" />
-              <option name="host" value="leetcode.cn" />
-              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P83_删除排序链表中的重复元素.java" />
-              <option name="titleSlug" value="remove-duplicates-from-sorted-list" />
-            </LeetcodeEditor>
-          </value>
-        </entry>
         <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P856_ScoreOfParentheses.java">
           <value>
             <LeetcodeEditor>
@@ -1686,17 +1598,6 @@
             </LeetcodeEditor>
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/PLCP 47_入场安检.java">
-          <value>
-            <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/PLCP 47_入场安检.md" />
-              <option name="frontendQuestionId" value="leetcode.cnLCP 47" />
-              <option name="host" value="leetcode.cn" />
-              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/PLCP 47_入场安检.java" />
-              <option name="titleSlug" value="oPs9Bm" />
-            </LeetcodeEditor>
-          </value>
-        </entry>
         <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P剑指 Offer 05_TiHuanKongGeLcof.java">
           <value>
             <LeetcodeEditor>
@@ -1733,10 +1634,10 @@
         <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/leetcode/editor/cn/P5_LongestPalindromicSubstring.java">
           <value>
             <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P5_最长回文子串.md" />
+              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/leetcode/editor/cn/doc/content/P5_LongestPalindromicSubstring.md" />
               <option name="frontendQuestionId" value="leetcode.cn5" />
               <option name="host" value="leetcode.cn" />
-              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P5_最长回文子串.java" />
+              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/leetcode/editor/cn/P5_LongestPalindromicSubstring.java" />
               <option name="titleSlug" value="longest-palindromic-substring" />
             </LeetcodeEditor>
           </value>
@@ -1821,10 +1722,10 @@
         <entry key="$PROJECT_DIR$/leetCode/src/leetcode/editor/cn/P83_RemoveDuplicatesFromSortedList.java">
           <value>
             <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P83_删除排序链表中的重复元素.md" />
+              <option name="contentPath" value="$PROJECT_DIR$/leetCode/src/leetcode/editor/cn/doc/content/P83_RemoveDuplicatesFromSortedList.md" />
               <option name="frontendQuestionId" value="leetcode.cn83" />
               <option name="host" value="leetcode.cn" />
-              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P83_删除排序链表中的重复元素.java" />
+              <option name="path" value="$PROJECT_DIR$/leetCode/src/leetcode/editor/cn/P83_RemoveDuplicatesFromSortedList.java" />
               <option name="titleSlug" value="remove-duplicates-from-sorted-list" />
             </LeetcodeEditor>
           </value>
@@ -1881,17 +1782,6 @@
               <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P876_链表的中间结点.java" />
               <option name="titleSlug" value="middle-of-the-linked-list" />
-            </LeetcodeEditor>
-          </value>
-        </entry>
-        <entry key="/tmp/leetcode/editor/cn/[206]反转链表.java">
-          <value>
-            <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/leetCode/src/leetcode/editor/cn/doc/content/P206_ReverseLinkedList.md" />
-              <option name="frontendQuestionId" value="leetcode.cn206" />
-              <option name="host" value="leetcode.cn" />
-              <option name="path" value="$PROJECT_DIR$/leetCode/src/leetcode/editor/cn/P206_ReverseLinkedList.java" />
-              <option name="titleSlug" value="reverse-linked-list" />
             </LeetcodeEditor>
           </value>
         </entry>
