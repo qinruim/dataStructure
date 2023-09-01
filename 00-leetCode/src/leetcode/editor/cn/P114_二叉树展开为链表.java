@@ -26,6 +26,7 @@ class P114_FlattenBinaryTreeToLinkedList{
           this.val = val;
           this.left = left;
           this.right = right;
+
       }
   }
 
@@ -86,9 +87,8 @@ class Solution {
         if (root == null){
             return;
         }
-
         list.addLast(root);
-       traversal(root.left);
+        traversal(root.left);
         traversal(root.right);
     }
 }

@@ -21,32 +21,33 @@ class P46_Permutations {
     class Solution {
         ArrayList<List<Integer>> result = new ArrayList<>();
         LinkedList<Integer> path = new LinkedList<>();
-
+        boolean[] used;
         public List<List<Integer>> permute(int[] nums) {
-            //used数组记录当前元素是否已经在path里面，防止重复(boole数组默认值是false)
-            boolean[] used = new boolean[nums.length];
-            backTracking(nums,used);
-
+            used = new boolean[nums.length];
+            backTracking(nums);
             return result;
         }
 
-        private void backTracking(int[] nums,boolean[] used) {
-            if (path.size() == nums.length){
-                result.add(new ArrayList<>(path));
-                return;
-            }
+        private void backTracking(int[] nums) {
+           if (path.size() == nums.length){
+               result.add(new LinkedList<>(path));
+               return;
+           }
+
 
             for (int i = 0; i < nums.length; i++) {
-                //排列每个元素都是从0开始遍历，防止排列重复
                 if (used[i]){
                     continue;
                 }
                 used[i] = true;
                 path.add(nums[i]);
-                backTracking(nums,used);
+                backTracking(nums);
                 path.removeLast();
                 used[i] = false;
             }
+
+
+
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
