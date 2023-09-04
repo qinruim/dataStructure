@@ -1,0 +1,28 @@
+- 通过层序遍历获取每一层节点依次进行连接即可。
+
+* java
+
+```java
+class Solution {
+    public Node connect(Node root) {
+        if (root == null) return root;
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        Node p, pre;
+        while (!q.isEmpty()) {
+            int size = q.size();
+            pre = null;
+            for (int i = 0; i < size; i++) {
+                p = q.poll();
+                if (p.left != null) q.add(p.left);
+                if (p.right != null) q.add(p.right);
+                if (pre !=  null) pre.next = p;
+                pre = p;
+            }
+            pre.next = null; 
+        }
+        return root;
+    }
+}
+```
+

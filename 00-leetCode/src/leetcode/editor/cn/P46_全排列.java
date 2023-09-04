@@ -1,6 +1,5 @@
 package leetcode.editor.cn;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,34 +18,34 @@ class P46_Permutations {
     //力扣代码
 //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        ArrayList<List<Integer>> result = new ArrayList<>();
-        LinkedList<Integer> path = new LinkedList<>();
+
+        LinkedList<List<Integer>> res = new LinkedList<>();
+        LinkedList<Integer> track = new LinkedList<>();
         boolean[] used;
         public List<List<Integer>> permute(int[] nums) {
+            //used数组是给同一条树枝上的重复元素去重
             used = new boolean[nums.length];
-            backTracking(nums);
-            return result;
+            backTrack(nums);
+            return res;
         }
 
-        private void backTracking(int[] nums) {
-           if (path.size() == nums.length){
-               result.add(new LinkedList<>(path));
-               return;
-           }
-
+        private void backTrack(int[] nums) {
+            //排列 有序 不要startIndex控制元素相对位置来去重
+            if (track.size() == nums.length){
+                res.add(new LinkedList<>(track));
+                return;
+            }
 
             for (int i = 0; i < nums.length; i++) {
                 if (used[i]){
                     continue;
                 }
+                track.add(nums[i]);
                 used[i] = true;
-                path.add(nums[i]);
-                backTracking(nums);
-                path.removeLast();
+                backTrack(nums);
                 used[i] = false;
+                track.removeLast();
             }
-
-
 
         }
     }
