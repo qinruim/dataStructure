@@ -38,25 +38,28 @@ class P236_LowestCommonAncestorOfABinaryTree{
 	 */
 	class Solution {
 		public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-			//终止条件(两个条件可以合并)
 			if (root == null){
 				return null;
 			}
+
+			//前序位置
 			if (root == p || root == q){
 				return root;
 			}
 
 			TreeNode left = lowestCommonAncestor(root.left,p,q);
 			TreeNode right = lowestCommonAncestor(root.right,p,q);
-			//单层递归逻辑
-			if (left != null && right != null){
+
+			//后序位置
+			if (left == null && right == null){
+				return null;
+			}
+			if (left != null && right!= null){
 				return root;
 			}
-			else if (left != null && right == null){
-				return left;
-			}else {//包含了都为空的情况，返回的实际是null
-				return right;
-			}
+			return left == null ? right : left;
+
+
  		}
 	}
 //leetcode submit region end(Prohibit modification and deletion)
