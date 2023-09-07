@@ -17,11 +17,14 @@ class P167_TwoSumIiInputArrayIsSorted{
 class Solution {
     public int[] twoSum(int[] numbers, int target) {
 		int left = 0,right = numbers.length - 1;
-
+		int[] res = new int[2];
 		while (left < right){
 			int temp = numbers[left] + numbers[right];
 			if (temp == target){
-				return new int[]{left + 1, right + 1};
+//				return new int[]{left + 1, right + 1};
+				res[0] = left + 1;
+				res[1] = right + 1;
+				break;
 			}else if (temp < target){
 				left++;
 			}else if (temp > target){
@@ -31,7 +34,8 @@ class Solution {
 
 
 
-		return null;
+//		return null;
+		return res;
 //		return new int[]{-1,-1};
     }
 }
