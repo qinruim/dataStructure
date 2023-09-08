@@ -21,7 +21,7 @@ class Solution {
 		while (left < right){
 			int temp = numbers[left] + numbers[right];
 			if (temp == target){
-//				return new int[]{left + 1, right + 1};
+				//返回答案的下标（从1开始）
 				res[0] = left + 1;
 				res[1] = right + 1;
 				break;
@@ -31,12 +31,7 @@ class Solution {
 				right--;
 			}
 		}
-
-
-
-//		return null;
 		return res;
-//		return new int[]{-1,-1};
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
