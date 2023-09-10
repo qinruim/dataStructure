@@ -24,11 +24,11 @@ class Solution {
 
 		for (int fast = 0; fast < nums.length; fast++) {
 			if (nums[fast] != nums[slow]){
-//				slow++;
-				nums[++slow] = nums[fast];
+				slow++;
+				nums[slow] = nums[fast];
 			}
 		}
-
+		// 数组长度为索引 + 1
 		return slow + 1;
     }
 }

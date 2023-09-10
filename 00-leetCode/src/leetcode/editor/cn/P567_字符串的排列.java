@@ -49,7 +49,7 @@ class Solution {
 			}
 
 			//缩   子串长度一定 == s1.length  所以其实是一相等就缩  维护一个定长的窗口  因此这个while用if也行
-			while (right - left == s1.length()){
+			if (right - left == s1.length()){
 				//更新 在定长的窗口内 一旦窗口符合要求 即找到了
 				if (valid == need.size()){
 					return true;

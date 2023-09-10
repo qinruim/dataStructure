@@ -23,11 +23,7 @@ class Solution {
 		for (int i = 0; i < t.length(); i++) {
 			char c = t.charAt(i);
 			need.put(c,need.getOrDefault(c,0) + 1);
-//			need.put(c, need.containsKey(c) ? need.get(c) + 1 : 1);
 		}
-//		for (int i = 0; i < s.length(); i++) {
-//			window.put(s.charAt(i),0);
-//		}
 
 		int left = 0,right = 0;
 		int valid = 0; //窗口中满足need要求的字符的个数  当valid==need.size 即找到了一个字串

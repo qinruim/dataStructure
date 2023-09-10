@@ -41,10 +41,10 @@ public class Solution {
 //		return method1(headA,headB);
 
 		//方法2：双指针
-//		return method2(headA,headB);
+		return method2(headA,headB);
 
 		//方法3:双指针 思路类似方法2
-		return method3(headA,headB);
+//		return method3(headA,headB);
 
 
 
