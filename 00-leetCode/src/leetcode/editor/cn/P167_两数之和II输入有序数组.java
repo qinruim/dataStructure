@@ -17,22 +17,21 @@ class P167_TwoSumIiInputArrayIsSorted{
 class Solution {
     public int[] twoSum(int[] numbers, int target) {
 		int left = 0,right = numbers.length - 1;
-
+		int[] res = new int[2];
 		while (left < right){
 			int temp = numbers[left] + numbers[right];
 			if (temp == target){
-				return new int[]{left + 1, right + 1};
+				//返回答案的下标（从1开始）
+				res[0] = left + 1;
+				res[1] = right + 1;
+				break;
 			}else if (temp < target){
 				left++;
 			}else if (temp > target){
 				right--;
 			}
 		}
-
-
-
-		return null;
-//		return new int[]{-1,-1};
+		return res;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

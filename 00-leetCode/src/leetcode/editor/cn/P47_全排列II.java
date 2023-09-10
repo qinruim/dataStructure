@@ -19,38 +19,35 @@ class P47_PermutationsIi {
 //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         ArrayList<List<Integer>> result = new ArrayList<>();
-        LinkedList<Integer> path = new LinkedList<>();
+        LinkedList<Integer> track = new LinkedList<>();
 
         public List<List<Integer>> permuteUnique(int[] nums) {
-           //树层去重
             Arrays.sort(nums);
             boolean[] used = new boolean[nums.length];
-
             backTracking(nums,used);
             return result;
         }
 
         private void backTracking(int[] nums, boolean[] used) {
-            if (path.size() == nums.length){
-                result.add(new ArrayList<>(path));
+            if (track.size() == nums.length){
+                result.add(new ArrayList<>(track));
                 return;
             }
 
             for (int i = 0; i < nums.length; i++) {
                 //树层去重 即used[i-1]回溯了，是false，且nums[i] == nums[i-1],剪枝
-                if (i > 0 && !used[i - 1] && nums[i] == nums[i -1]){
+                //保证相同元素相对位置不变
+                if (i > 0 && !used[i - 1] && nums[i] == nums[i - 1]){
                     continue;
                 }
-
                 //排列每个元素都是从0开始遍历，防止排列重复
                 if (used[i]){
                     continue;
                 }
-
                 used[i] = true;
-                path.add(nums[i]);
+                track.add(nums[i]);
                 backTracking(nums,used);
-                path.removeLast();
+                track.removeLast();
                 used[i] = false;
 
 

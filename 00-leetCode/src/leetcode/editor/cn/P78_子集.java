@@ -1,6 +1,5 @@
 package leetcode.editor.cn;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,29 +18,30 @@ class P78_Subsets{
 //力扣代码提交区
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-	List<List<Integer>> result = new ArrayList<>();
-	LinkedList<Integer> path = new LinkedList<>();
+	LinkedList<List<Integer>> res = new LinkedList<>();
+	LinkedList<Integer> track = new LinkedList<>();
     public List<List<Integer>> subsets(int[] nums) {
 
+		backTrack(nums,0);
+		return res;
 
-		int startIndex = 0;
-		backTracking(nums,startIndex);
-		return result;
     }
 
-	private void backTracking(int[] nums, int startIndex) {
-		result.add(new ArrayList<>(path));//每个节点都要加入结果  跟组合问题不同
-		if (startIndex >= nums.length){
-			return;
-		}
+	private void backTrack(int[] nums, int startIndex) {
+		//for循环会终止  这里不需要显示写base case
+//		if (track.size() > nums.length){
+//			return;
+//		}
 
+		//前序位置
+		res.add(new LinkedList<>(track));
+
+		//通过startIndex控制树枝 避免重复
 		for (int i = startIndex; i < nums.length; i++) {
-			path.addLast(nums[i]);
-			backTracking(nums,i + 1);
-			path.removeLast();
-
+			track.add(nums[i]);
+			backTrack(nums,i + 1);
+			track.removeLast();
 		}
-
 	}
 }
 //leetcode submit region end(Prohibit modification and deletion)

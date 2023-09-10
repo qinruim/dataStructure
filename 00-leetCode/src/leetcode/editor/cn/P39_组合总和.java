@@ -42,11 +42,12 @@ class Solution {
 			return;
 		}
 
-		//剪枝，startIndex++ ： 每一层，往后遍历一个元素就将前面元素排除，防治集合重复
-		for (int i = startIndex; i < candidates.length; i++,startIndex++) {
+		//剪枝，startIndex++ ： 每一层，往后遍历一个元素就将前面元素排除，防止集合重复
+		for (int i = startIndex; i < candidates.length; i++) {
 			target -= candidates[i];
 			combine.addLast(candidates[i]);
-			backTracking(candidates,target, startIndex);
+			//元素可以重复使用  不用i+1 每一层递归用i即可
+			backTracking(candidates,target, i);
 			combine.removeLast();
 			target += candidates[i];
 		}
