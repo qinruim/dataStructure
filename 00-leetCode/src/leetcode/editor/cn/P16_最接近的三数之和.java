@@ -23,6 +23,8 @@ class Solution {
 			return 0;
 		}
 
+		String s = "sss";
+		s.toLowerCase();
 		Arrays.sort(nums);
 		//记录三数和与target的偏差
 		int delta = Integer.MAX_VALUE;
