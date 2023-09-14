@@ -63,6 +63,7 @@ public class HJ24合唱队 {
         res = Math.min(res, countL + countR);
         }
 
+        res = res == Integer.MAX_VALUE ? 0 : res;
         System.out.println(res);
 
     }

@@ -26,8 +26,11 @@ class Solution {
 		Arrays.fill(dp,1);
 
 		for (int i = 0; i < len; i++) {
+			// 寻找 nums[0..j-1] 中比 nums[i] 小的元素
 			for (int j = 0; j < i; j++) {
 				if (nums[j] < nums[i]){
+					// 把 nums[i] 接在后面，即可形成长度为 dp[j] + 1，
+					// 且以 nums[i] 为结尾的递增子序列
 					dp[i] = Math.max(dp[j] + 1,dp[i]);
 				}
 			}
