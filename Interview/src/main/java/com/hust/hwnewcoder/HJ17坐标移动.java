@@ -25,7 +25,8 @@ public class HJ17坐标移动 {
 
         for(int i = 0;i < n;i++){
 
-            if(unValid(ss[i])){continue;}
+//            if(unValid(ss[i])){continue;}
+            if(!ss[i].matches("[AWSD][0-9]{1,2}")){continue;}
             String direc = ss[i].substring(0,1);
             int step = Integer.parseInt(ss[i].substring(1,ss[i].length()));
             if(direc.equals("A")){

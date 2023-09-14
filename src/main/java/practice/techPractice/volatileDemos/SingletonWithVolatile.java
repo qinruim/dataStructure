@@ -9,7 +9,7 @@ package practice.techPractice.volatileDemos;
  */
 public class SingletonWithVolatile {
 
-    //静态 生成一个单例对象
+    //静态 生成一个单例对象 且用volatile修饰，禁止指令重排 防止多线程环境下指向空
     private volatile static SingletonWithVolatile uniqueSingletonInstance;
 
     //构造器（私有）通过将构造函数设置为私有，该类防止外部类直接实例化该类。

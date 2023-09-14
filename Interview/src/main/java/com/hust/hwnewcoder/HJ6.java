@@ -1,6 +1,7 @@
 package com.hust.hwnewcoder;
 
 import jdk.nashorn.internal.runtime.regexp.JoniRegExp;
+import sun.reflect.generics.tree.Tree;
 
 import java.util.*;
 
@@ -18,6 +19,8 @@ public class HJ6 {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int num = in.nextInt();
+
+
 
 //        int k = (int) Math.sqrt(num);
 //
