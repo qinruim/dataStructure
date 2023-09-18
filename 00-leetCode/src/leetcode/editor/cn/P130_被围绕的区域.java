@@ -79,10 +79,6 @@ class P130_SurroundedRegions {
             int[] pos = new int[]{i, j};
             isLand.add(pos);
 
-//            boolean flag = dfs(board,i,j - 1)
-//                            && dfs(board,i,j + 1)
-//                            && dfs(board,i - 1,j)
-//                            && dfs(board,i + 1,j);
             boolean a = dfs(board, i, j - 1);
             boolean b = dfs(board, i, j + 1);
             boolean c = dfs(board, i - 1, j);
