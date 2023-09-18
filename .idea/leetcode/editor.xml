@@ -278,6 +278,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P1254_统计封闭岛屿的数目.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P1254_统计封闭岛屿的数目.md" />
+              <option name="frontendQuestionId" value="leetcode.cn1254" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P1254_统计封闭岛屿的数目.java" />
+              <option name="titleSlug" value="number-of-closed-islands" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P1288_删除被覆盖区间.java">
           <value>
             <LeetcodeEditor>
@@ -286,6 +297,17 @@
               <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P1288_删除被覆盖区间.java" />
               <option name="titleSlug" value="remove-covered-intervals" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P130_被围绕的区域.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P130_被围绕的区域.md" />
+              <option name="frontendQuestionId" value="leetcode.cn130" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P130_被围绕的区域.java" />
+              <option name="titleSlug" value="surrounded-regions" />
             </LeetcodeEditor>
           </value>
         </entry>
@@ -630,6 +652,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P200_岛屿数量.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P200_岛屿数量.md" />
+              <option name="frontendQuestionId" value="leetcode.cn200" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P200_岛屿数量.java" />
+              <option name="titleSlug" value="number-of-islands" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P202_HappyNumber.java">
           <value>
             <LeetcodeEditor>
@@ -858,6 +891,17 @@
               <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P260_SingleNumberIii.java" />
               <option name="titleSlug" value="single-number-iii" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P2793_航班机票状态.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/P2793_航班机票状态.md" />
+              <option name="frontendQuestionId" value="leetcode.cn2793" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P2793_航班机票状态.java" />
+              <option name="titleSlug" value="status-of-flight-tickets" />
             </LeetcodeEditor>
           </value>
         </entry>
