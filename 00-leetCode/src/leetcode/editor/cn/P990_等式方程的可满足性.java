@@ -35,7 +35,7 @@ class Solution {
 			}
 		}
 
-		//检查不相等的式子是否能打破连通性
+		//检查不相等的式子是否能打破连通性(即检查不该相连的是否相连了)
 		for (String eq : equations) {
 			if (eq.substring(1,3).equals("!=")){
 				char x = eq.charAt(0);
@@ -43,6 +43,7 @@ class Solution {
 				if (uf.connected(x - 'a',y - 'a')){
 					return false;
 				}
+//				return !uf.connected(x - 'a',y - 'a');
 			}
 		}
 		return true;

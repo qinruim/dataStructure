@@ -1,6 +1,6 @@
 package leetcode.editor.cn;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * 杀掉进程
@@ -18,54 +18,36 @@ class P582_KillProcess{
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public List<Integer> killProcess(List<Integer> pid, List<Integer> ppid, int kill) {
-		UF uf = new UF(pid.size());
-
-		for (int i = 0; i < ppid.size(); i++) {
+		//先把题目输入的这棵树转化成常规形式（父节点指向子节点），
+		// 然后执行遍历算法（DFS/BFS 都可以）去遍历删除以目标节点 kill 为根的整棵子树
+		//构建多叉树 key为父节点 value为一个链表，存储所有子节点
+		Map<Integer,List<Integer>> tree = new HashMap<>();
+		for (int i = 0; i < pid.size(); i++) {
+			int child = pid.get(i);
 			int parent = ppid.get(i);
-			if (parent == 0){continue;}
-			uf.union(parent,pid.get(i));
+			tree.putIfAbsent(parent,new ArrayList<>());
+			tree.get(parent).add(child);
 		}
 
+		LinkedList<Integer> res = new LinkedList<>();
+		//遍历多叉树
+		Queue<Integer> queue = new LinkedList<>();
+		queue.offer(kill);
+		while (!queue.isEmpty()){
+			int cur = queue.poll();
+			res.add(cur);
+			if (tree.containsKey(cur)){
+				queue.addAll(tree.get(cur));
+			}
+
+		}
+		return res;
 
 
 
-
-		return null;
 
     }
 
-	class UF{
-		private int count;
-		private int[] parent;
-		public UF(int n){
-			this.count = n;
-			parent = new int[n];
-			for (int i = 0; i < n; i++) {
-				parent[i] = i;
-			}
-		}
-
-		public boolean connected(int x,int y){
-			return findRoot(x) == findRoot(y);
-		}
-
-		public void union(int x,int y){
-			int rootX = findRoot(x);
-			int rootY = findRoot(y);
-			if (rootX == rootY)return;
-			parent[rootX] = rootY;
-			count--;
-		}
-		public int getCount(){
-			return count;
-		}
-		private int findRoot(int x) {
-			if (x != parent[x]){
-				parent[x] = findRoot(parent[x]);
-			}
-			return parent[x];
-		}
-	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
