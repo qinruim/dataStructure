@@ -14,63 +14,32 @@ import java.util.Scanner;
 public class Demo1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-//        List<Integer> food = new ArrayList<>();
-//        List<Integer> drink = new ArrayList<>();
-
-
-
         String s1 = scanner.nextLine();
         String s2 = scanner.nextLine();
         int max = scanner.nextInt();
-        String[] ss1 = s1.split(" ");
-        String[] ss2 = s2.split(" ");
-//        int[] foods = new int[ss1.length];
-//        int[] drinks = new int[ss2.length];
-
-
+        String[] foods = s1.split(" ");
+        String[] drinks = s2.split(" ");
         int res = 0;
 
-        boolean[] used = new boolean[ss2.length];
-        for (int i = 0; i < ss1.length; i++) {
-//            foods[i] = Integer.parseInt(ss1[i]);
-            int foodI = Integer.parseInt(ss1[i]);
+        boolean[] used = new boolean[drinks.length];
+        for (int i = 0; i < foods.length; i++) {
+            int foodI = Integer.parseInt(foods[i]);
             if (foodI <= max){
                 res++;
-
-                for (int j = 0; j < ss2.length; j++) {
-                   int drinkI = Integer.parseInt(ss2[j]);
+                for (int j = 0; j < drinks.length; j++) {
+                   int drinkI = Integer.parseInt(drinks[j]);
                     if (drinkI <= max){
                         if (!used[j]){
                             used[j] = true;
                             res++;
+                            if (foodI + drinkI <= max){
+                                res++;
+                            }
                         }
-
-                        if (foodI + drinkI <= max){
-                            res++;
-                        }
-
                     }
                 }
             }
-
         }
-
-
-//        for (int j = 0; j < ss2.length; j++) {
-//            drinks[j] = Integer.parseInt(ss2[j]);
-//            if (drinks[j] <= max){
-//                if (!used[j]){
-//                    used[j] = true;
-//                    res++;
-//                }
-//
-//                if (foods[i] + drinks[j] <= max){
-//                    res++;
-//                }
-//
-//            }
-//        }
-
         System.out.println(res);
     }
 }

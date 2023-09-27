@@ -21,7 +21,7 @@ import static practice.techPractice.sort.Utils.swap;
  */
 public class SelectionSort {
     public static void main(String[] args) {
-        int a[] = {2,4,6,12,8,6,99,43,41};
+        int a[] = {605,525,699,715,408};
         selection(a);
 
     }

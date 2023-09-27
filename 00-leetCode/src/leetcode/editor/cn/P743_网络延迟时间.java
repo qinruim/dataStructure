@@ -72,17 +72,17 @@ class Solution {
 			//相邻节点装入队列 更新最短距离
 			for (int[] neighbor : graph[curID]) {
 				int nextID = neighbor[0];
-				int disToNext = curDis + neighbor[1];
-				if (disToNext < disTo[nextID]){
-					disTo[nextID] = disToNext; //更新最短距离
-					pq.offer(new NODE(nextID,disToNext));
+				int nextDis = curDis + neighbor[1];
+				if (nextDis < disTo[nextID]){
+					disTo[nextID] = nextDis; //更新最短距离
+					pq.offer(new NODE(nextID,nextDis));
 				}
 			}
 		}
 		return disTo;
 	}
 
-	class NODE{
+	private class NODE{
 		private int id; //图节点编号
 		private int dis; //从start到当前节点的距离
 
