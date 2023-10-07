@@ -2148,6 +2148,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/PLCR 122_路径加密.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/doc/content/PLCR 122_路径加密.md" />
+              <option name="frontendQuestionId" value="leetcode.cnLCR 122" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/PLCR 122_路径加密.java" />
+              <option name="titleSlug" value="ti-huan-kong-ge-lcof" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/00-leetCode/src/leetcode/editor/cn/P剑指 Offer 05_TiHuanKongGeLcof.java">
           <value>
             <LeetcodeEditor>

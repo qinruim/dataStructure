@@ -16,6 +16,41 @@ class P309_BestTimeToBuyAndSellStockWithCooldown{
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int maxProfit(int[] prices) {
+//		return getMax(prices);
+		//自己写一下
+		return getMax1(prices);
+    }
+
+	private int getMax1(int[] prices) {
+		int n = prices.length; //天数
+		if (n == 0 || n == 1) return 0;
+
+		//n>=2
+		//一天冷冻期 交易次数不限
+		//状态不变 第i天买入的时候，从第i-2天转移
+		int[][] dp = new int[n + 1][2];
+		dp[0][0] = 0;
+		dp[0][1] = Integer.MIN_VALUE;
+
+		for (int i = 1; i <= n; i++) {
+			if (i - 2 < 0){
+				//即i=1
+				dp[i][0] = Math.max(dp[i - 1][0],dp[i - 1][1] + prices[i - 1]);
+				dp[i][1] = -prices[i - 1];
+				continue;
+			}
+			dp[i][0] = Math.max(dp[i - 1][0],dp[i - 1][1] + prices[i - 1]);
+			//dp[i-2][0] - prices[i]
+			//要在第i天买，所以第i-1天一定不能卖！其实第i-1天一共有三种可能，买 or 卖 or 不动
+			//如果i-1天买或者卖（冷冻） 第i天都不能买
+			//只能第i-1天不动，即第i-2天不持有，保持到第i天，才能在第i天买入
+			dp[i][1] = Math.max(dp[i - 1][1],dp[i - 2][0] - prices[i - 1]);
+		}
+
+		return dp[n][0];
+	}
+
+	private int getMax(int[] prices) {
 		int len = prices.length;
 
 		if (len == 0 || len == 1){
@@ -44,7 +79,8 @@ class Solution {
 		}
 
 		return Math.max(Math.max(dp[len - 1][2],dp[len - 1][3]),dp[len - 1][1]);
-    }
+
+	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

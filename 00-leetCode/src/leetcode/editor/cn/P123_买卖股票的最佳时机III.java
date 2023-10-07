@@ -1,5 +1,7 @@
 package leetcode.editor.cn;
 
+import java.util.function.DoublePredicate;
+
 /**
  * 买卖股票的最佳时机 III
  * best-time-to-buy-and-sell-stock-iii
@@ -16,6 +18,46 @@ class P123_BestTimeToBuyAndSellStockIii{
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int maxProfit(int[] prices) {
+//		return getMax(prices);
+		//自己写一下
+		return getMax1(prices);
+
+
+    }
+
+
+	private int getMax1(int[] prices) {
+		//最多两次交易，k = 2
+		int n = prices.length;
+		if (n <= 1) return 0;
+
+		int[][][] dp = new int[n + 1][3][2];
+		//初始化 n = 0
+		for (int k = 0; k < 3; k++) {
+			dp[0][k][0] = 0;
+			dp[0][k][1] = Integer.MIN_VALUE;
+		}
+		//k = 0
+		for (int i = 0; i < n; i++) {
+			dp[i][0][0] = 0;
+			dp[i][0][1] = Integer.MIN_VALUE;
+		}
+
+		//买入算一次交易
+		for (int i = 1; i <= n; i++) {
+			for (int j = 1; j < 3; j++) {
+				//不动，卖出
+				dp[i][j][0] = Math.max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i - 1]);
+				//不动，买入
+				dp[i][j][1] = Math.max(dp[i - 1][j][1], dp[i - 1][j - 1][0] - prices[i - 1]);
+			}
+		}
+
+		return dp[n][2][0];
+
+	}
+
+	private int getMax(int[] prices) {
 		//只能交易0次、一次或者两次
 
 		int len  = prices.length;
@@ -46,7 +88,8 @@ class Solution {
 
 		//最大一定是两次卖出的状态
 		return dp[len - 1][4];
-    }
+
+	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

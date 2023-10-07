@@ -16,6 +16,32 @@ class P714_BestTimeToBuyAndSellStockWithTransactionFee{
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int maxProfit(int[] prices, int fee) {
+//		return getMax(prices,fee);
+		//自己写一下
+		return getMax1(prices,fee);
+
+    }
+
+	private int getMax1(int[] prices, int fee) {
+		//无数次交易 +手续费
+		int n = prices.length;
+		if (n <= 1) return 0;
+
+		int[][] dp = new int[n + 1][2];
+		dp[0][0] = 0;
+		dp[0][1] = Integer.MIN_VALUE;
+
+		//统一在买入时交手续费
+		for (int i = 1; i <= n; i++) {
+			dp[i][0] = Math.max(dp[i - 1][0],dp[i - 1][1] + prices[i - 1]);
+			dp[i][1] = Math.max(dp[i - 1][1],dp[i - 1][0] - prices[i - 1] - fee);
+
+		}
+
+		return dp[n][0];
+	}
+
+	private int getMax(int[] prices, int fee) {
 		int len = prices.length;
 
 		//在卖出时交手续费 dp[0][0] 初始化成 -prices[i]
@@ -44,7 +70,7 @@ class Solution {
 		}
 
 		return dp[len - 1][1];
-    }
+	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

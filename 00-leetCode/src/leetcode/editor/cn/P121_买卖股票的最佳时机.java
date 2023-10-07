@@ -16,6 +16,38 @@ class P121_BestTimeToBuyAndSellStock{
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int maxProfit(int[] prices) {
+//		return getMax(prices);
+		//自己写一下
+		return getMax1(prices);
+
+    }
+
+	private int getMax1(int[] prices) {
+		int n = prices.length; //天数
+		if (n <= 0) return 0;
+
+
+		int[][] dp = new int[n + 1][2];//最大交易次数k为1 因此只有0、1两种状态
+		//初始化 n从1开始 0代表还没开始 利润为0
+		dp[0][0] = 0;
+		dp[0][1] = Integer.MIN_VALUE;
+
+
+
+		for (int i = 1; i <= n; i++) {
+			//max（第i天不动，第i天卖出）
+			dp[i][0] = Math.max(dp[i - 1][0],dp[i - 1][1] + prices[i - 1]);
+			//只能买卖一次 如果用dp[i-1][1]-prices[i]，可能出现买卖多次(之前买卖的利润减去当前价格)
+			//用-prices[i]，说明新持有的前提是 以前一定没有持有过（0-prices[i]）
+			//max（第i天不动，第i天买入）
+			dp[i][1] = Math.max(dp[i - 1][1],-prices[i - 1]);
+//			dp[i][1] = Math.max(dp[i - 1][1],dp[i - 1][1] - prices[i - 1]);
+
+		}
+		return dp[n][0];
+	}
+
+	private int getMax(int[] prices) {
 		//dp[i][0]:第i天持有股票的最大利润   dp[i][1]:第i天不持有股票的最大利润
 		//初始利润为0，买入之后为负
 		//最后返回max(dp[n-1][0],dp[n-1][1])
@@ -48,7 +80,8 @@ class Solution {
 		}
 
 		return Math.max(dp[prices.length - 1][0],dp[prices.length - 1][1]);
-    }
+
+	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
