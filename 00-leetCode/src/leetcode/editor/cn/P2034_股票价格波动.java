@@ -12,7 +12,7 @@ import java.util.*;
 class P2034_StockPriceFluctuation {
     public static void main(String[] args) {
         //测试代码
-        Solution solution = new P2034_StockPriceFluctuation().new Solution();
+//        Solution solution = new P2034_StockPriceFluctuation().new Solution();
     }
 
     //力扣代码提交区
