@@ -34,14 +34,8 @@ class Solution {
 					dp[i] = Math.max(dp[j] + 1,dp[i]);
 				}
 			}
-
 			res = Math.max(res,dp[i]);
 		}
-
-
-
-
-
 		return res;
     }
 }
